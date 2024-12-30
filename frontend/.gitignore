@@ -1,11 +1,11 @@
-# Dependencies
-node_modules/
-
 # Virtual environment
 /.venv/
 
 # Cache and Python bytecode
 /.cache/
+
+# env
+.env
 
 # Other unwanted files
 *.pyc
