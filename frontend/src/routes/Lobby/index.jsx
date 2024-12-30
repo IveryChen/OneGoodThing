@@ -1,7 +1,16 @@
 import React from "react";
 
-export default class Lobby extends React.PureComponent {
+import IconButton from "../../components/IconButton";
+import { withRouter } from "../../utils/withRouter";
+
+class Lobby extends React.PureComponent {
+  onClick = () => {
+    this.props.navigate(`/home`);
+  };
+
   render() {
-    return null;
+    return <IconButton label="Sign in" onClick={this.onClick} />;
   }
 }
+
+export default withRouter(Lobby);
