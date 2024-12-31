@@ -32,8 +32,6 @@ export default function setUpMaterials(renderer, scene, camera) {
     metalness: 0.0,
     roughness: 0.4,
     envMapIntensity: 0.5,
-    clearcoat: 0.5,
-    clearcoatRoughness: 0.2,
   });
 
   const composer = new EffectComposer(renderer);
