@@ -44,12 +44,11 @@ export const initThreeJS = (canvas) => {
   let model = null;
 
   const camera = new PerspectiveCamera(
-    90,
+    45,
     clientWidth / clientHeight,
     1 / 8,
     10000
   );
-  camera.position.z = 2;
   camera.position.y = 1;
 
   // Set up scene and lights
@@ -116,7 +115,7 @@ export const initThreeJS = (canvas) => {
       const distance = camera.position.z - object.position.z;
       const heightAtDistance = 2 * Math.tan(fov / 2) * distance;
       const scale = heightAtDistance / maxDim;
-      object.scale.setScalar(scale * 1.0);
+      object.scale.setScalar(scale * 0.5);
 
       scene.add(object);
     },
