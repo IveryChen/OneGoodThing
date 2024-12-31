@@ -3,9 +3,9 @@ import React from "react";
 
 import Box from "../../components/Box";
 import Header from "../../components/Header";
-import NoteModal from "../../components/NoteModal";
 import { withRouter } from "../../utils/withRouter";
 
+import NoteModal from "./NoteModal";
 import { initThreeJS } from "./setUpThreeJS";
 
 const StyledJar = styled(Box)`
