@@ -1,17 +1,19 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
-import { stickies } from "../../constants/constants";
+import { stickies, theme } from "../../constants/constants";
 
 const StyledInput = styled.textarea`
   background-color: ${stickies.lightyellow};
   border-style: none;
   color: black;
+  font-family: inherit;
   height: 320px;
   padding: 8px;
+  user-select: text;
   width: 320px;
-  font-family: inherit;
 `;
 
 export default class NoteModal extends React.PureComponent {
@@ -34,6 +36,7 @@ export default class NoteModal extends React.PureComponent {
           type="text"
           value={data}
         />
+        <IconButton label="SUBMIT" justifySelf="end" color={theme.darkgray} />
       </Modal>
     );
   }
