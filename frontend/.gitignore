@@ -1,6 +1,12 @@
 # Virtual environment
 /.venv/
 
+# 3d
+*.blend
+*.blend1
+*.fbx
+*.obj
+
 # Cache and Python bytecode
 /.cache/
 
