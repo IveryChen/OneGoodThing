@@ -54,6 +54,7 @@ class Home extends React.PureComponent {
         <NoteModal
           data={note}
           isOpen={isOpen}
+          onChangeIsOpen={this.onChangeIsOpen}
           onChangeNote={this.onChangeNote}
           onClose={this.onClose}
         />

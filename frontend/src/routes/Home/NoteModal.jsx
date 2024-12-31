@@ -24,6 +24,11 @@ export default class NoteModal extends React.PureComponent {
     this.props.onChangeNote(value);
   };
 
+  onClick = () => {
+    // submitNote(note);
+    this.props.onChangeIsOpen(false);
+  };
+
   render() {
     const { data, isOpen, onClose } = this.props;
 
@@ -38,9 +43,10 @@ export default class NoteModal extends React.PureComponent {
         />
         <IconButton
           borderStyle="none"
-          label="SUBMIT"
-          justifySelf="end"
           color={theme.darkgray}
+          justifySelf="end"
+          label="SUBMIT"
+          onClick={this.onClick}
         />
       </Modal>
     );
