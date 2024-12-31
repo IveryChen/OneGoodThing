@@ -73,8 +73,11 @@ export const initThreeJS = (canvas) => {
     scene.environment = envMap;
   });
 
-  const { glassMaterial, metalMaterial, plasticMaterial, composer } =
-    setUpMaterials(renderer, scene, camera);
+  const { glassMaterial, plasticMaterial, composer } = setUpMaterials(
+    renderer,
+    scene,
+    camera
+  );
 
   const loader = new FBXLoader();
   loader.load(
@@ -92,15 +95,11 @@ export const initThreeJS = (canvas) => {
 
           child.geometry = optimizeGeometry(child.geometry);
 
-          if (name.includes("metal")) {
-            child.material = metalMaterial;
-            child.castShadow = true;
-            child.receiveShadow = true;
-          } else if (name.includes("glass")) {
+          if (name.includes("glass")) {
             child.material = glassMaterial;
             child.castShadow = false;
             child.receiveShadow = true;
-          } else if (name.includes("plastic")) {
+          } else if (name.includes("lid")) {
             child.material = plasticMaterial;
             child.castShadow = true;
             child.receiveShadow = true;

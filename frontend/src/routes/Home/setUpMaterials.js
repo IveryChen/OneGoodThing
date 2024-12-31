@@ -9,13 +9,6 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 
 export default function setUpMaterials(renderer, scene, camera) {
-  const metalMaterial = new MeshStandardMaterial({
-    color: new Color(0x707070),
-    metalness: 1.0,
-    roughness: 0.2,
-    envMapIntensity: 2.0,
-  });
-
   const glassMaterial = new MeshPhysicalMaterial({
     color: new Color(0xffffff),
     metalness: 0.0,
@@ -82,5 +75,5 @@ export default function setUpMaterials(renderer, scene, camera) {
   const chromaticAberrationPass = new ShaderPass(chromaticAberrationShader);
   composer.addPass(chromaticAberrationPass);
 
-  return { composer, glassMaterial, metalMaterial, plasticMaterial };
+  return { composer, glassMaterial, plasticMaterial };
 }

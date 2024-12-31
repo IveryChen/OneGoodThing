@@ -4,8 +4,10 @@ import React from "react";
 import Box from "../../components/Box";
 import { withRouter } from "../../utils/withRouter";
 
+import { initThreeJS } from "./setUpThreeJS";
+
 const StyledJar = styled(Box)`
-  height: 320px;
+  height: 640px;
   width: 100%;
 
   @media (min-width: 768px) {
@@ -19,15 +21,15 @@ class Home extends React.PureComponent {
   threeInstance = null;
 
   componentDidMount() {
-    //   if (this.ref.current) {
-    //     this.threeInstance = initThreeJS(this.ref.current);
-    //   }
+    if (this.ref.current) {
+      this.threeInstance = initThreeJS(this.ref.current);
+    }
   }
 
   componentWillUnmount() {
-    //   if (this.threeInstance?.cleanup) {
-    //     this.threeInstance.cleanup();
-    //   }
+    if (this.threeInstance?.cleanup) {
+      this.threeInstance.cleanup();
+    }
   }
 
   render() {
