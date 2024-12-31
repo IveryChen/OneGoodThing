@@ -3,6 +3,7 @@ import React from "react";
 
 import Box from "../../components/Box";
 import Header from "../../components/Header";
+import NoteModal from "../../components/NoteModal";
 import { withRouter } from "../../utils/withRouter";
 
 import { initThreeJS } from "./setUpThreeJS";
@@ -18,6 +19,10 @@ const StyledJar = styled(Box)`
 `;
 
 class Home extends React.PureComponent {
+  state = { isOpen: false, note: "" };
+
+  onClose = () => this.setState({ isOpen: false });
+
   ref = React.createRef();
   threeInstance = null;
 
@@ -34,11 +39,16 @@ class Home extends React.PureComponent {
   }
 
   render() {
+    const { isOpen, note } = this.state;
+
     return (
-      <Box display="grid">
-        <Header />
-        <StyledJar as="canvas" justifySelf="center" ref={this.ref} />
-      </Box>
+      <>
+        <Box display="grid">
+          <Header />
+          <StyledJar as="canvas" justifySelf="center" ref={this.ref} />
+        </Box>
+        <NoteModal data={note} isOpen={isOpen} onClose={this.onClose} />
+      </>
     );
   }
 }
