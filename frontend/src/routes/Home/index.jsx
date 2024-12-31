@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 
 import Box from "../../components/Box";
+import Header from "../../components/Header";
 import { withRouter } from "../../utils/withRouter";
 
 import { initThreeJS } from "./setUpThreeJS";
@@ -33,7 +34,12 @@ class Home extends React.PureComponent {
   }
 
   render() {
-    return <StyledJar as="canvas" justifySelf="center" ref={this.ref} />;
+    return (
+      <Box display="grid">
+        <Header />
+        <StyledJar as="canvas" justifySelf="center" ref={this.ref} />
+      </Box>
+    );
   }
 }
 
