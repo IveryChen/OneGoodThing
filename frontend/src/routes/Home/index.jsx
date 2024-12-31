@@ -21,6 +21,10 @@ const StyledJar = styled(Box)`
 class Home extends React.PureComponent {
   state = { isOpen: false, note: "" };
 
+  onChangeIsOpen = (isOpen) => this.setState({ isOpen });
+
+  onChangeNote = (note) => this.setState({ note });
+
   onClose = () => this.setState({ isOpen: false });
 
   ref = React.createRef();
@@ -44,10 +48,15 @@ class Home extends React.PureComponent {
     return (
       <>
         <Box display="grid">
-          <Header />
+          <Header onChangeIsOpen={this.onChangeIsOpen} />
           <StyledJar as="canvas" justifySelf="center" ref={this.ref} />
         </Box>
-        <NoteModal data={note} isOpen={isOpen} onClose={this.onClose} />
+        <NoteModal
+          data={note}
+          isOpen={isOpen}
+          onChangeNote={this.onChangeNote}
+          onClose={this.onClose}
+        />
       </>
     );
   }

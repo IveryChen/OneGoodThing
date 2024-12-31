@@ -26,15 +26,12 @@ export default class Modal extends React.PureComponent {
         top={0}
       >
         <Box
-          bg="lightgray"
           borderRadius="2px"
           borderStyle="solid"
           borderWidth={1}
           maxHeight="80%"
           onClick={(e) => e.stopPropagation()}
           overflow="auto"
-          p="16px"
-          width="90%"
         >
           {children}
         </Box>
