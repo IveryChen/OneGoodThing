@@ -1,5 +1,5 @@
 import React from "react";
-import { MdAdd } from "react-icons/md";
+import { LiaPlusSolid } from "react-icons/lia";
 
 import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
@@ -11,16 +11,19 @@ export default class Header extends React.PureComponent {
 
   render() {
     return (
-      <Box height={56} p="8px">
+      <Box
+        display="flex"
+        height={56}
+        justifyContent="space-between"
+        p="8px"
+        width="100%"
+      >
         <Box
-          display="grid"
-          justifyContent="center"
-          justifySelf="end"
-          size={32}
+          as={LiaPlusSolid}
+          color={theme.darkgray}
           onClick={this.onClick}
-        >
-          <Box as={MdAdd} color={theme.darkgray} size="100%" />
-        </Box>
+          size={32}
+        />
       </Box>
     );
   }
