@@ -13,11 +13,6 @@ export default class Header extends React.PureComponent {
     return (
       <Box height={56} p="8px">
         <Box
-          bg="white"
-          borderColor={theme.darkgray}
-          borderRadius="50%"
-          borderStyle="solid"
-          borderWidth={2}
           display="grid"
           justifyContent="center"
           justifySelf="end"

@@ -9,7 +9,9 @@ class Lobby extends React.PureComponent {
   };
 
   render() {
-    return <IconButton label="Sign in" onClick={this.onClick} />;
+    return (
+      <IconButton borderStyle="none" label="Sign in" onClick={this.onClick} />
+    );
   }
 }
 

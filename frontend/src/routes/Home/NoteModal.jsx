@@ -36,7 +36,12 @@ export default class NoteModal extends React.PureComponent {
           type="text"
           value={data}
         />
-        <IconButton label="SUBMIT" justifySelf="end" color={theme.darkgray} />
+        <IconButton
+          borderStyle="none"
+          label="SUBMIT"
+          justifySelf="end"
+          color={theme.darkgray}
+        />
       </Modal>
     );
   }
