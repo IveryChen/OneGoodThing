@@ -2,8 +2,9 @@ import { branch } from "baobab-react/higher-order";
 import React from "react";
 import { LiaPlusSolid } from "react-icons/lia";
 
-import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
+import Box from "../Box";
+import Text from "../Text";
 
 class Header extends React.PureComponent {
   onClick = () => {
@@ -29,6 +30,9 @@ class Header extends React.PureComponent {
           onClick={this.onClick}
           size={32}
         />
+        <Text color={theme.darkgray} textTransform="uppercase">
+          {user.given_name}
+        </Text>
       </Box>
     );
   }
