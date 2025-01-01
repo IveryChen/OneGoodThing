@@ -1,15 +1,20 @@
+import { branch } from "baobab-react/higher-order";
 import React from "react";
 import { LiaPlusSolid } from "react-icons/lia";
 
 import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
 
-export default class Header extends React.PureComponent {
+class Header extends React.PureComponent {
   onClick = () => {
     this.props.onChangeIsOpen(true);
   };
 
   render() {
+    const { user } = this.props;
+
+    console.log("user", user);
+
     return (
       <Box
         display="flex"
@@ -28,3 +33,5 @@ export default class Header extends React.PureComponent {
     );
   }
 }
+
+export default branch({ user: ["user"] }, Header);

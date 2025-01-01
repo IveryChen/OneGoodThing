@@ -16,8 +16,6 @@ app.use(express.json());
 app.get("/auth/google/callback", async (req, res) => {
   try {
     const { code } = req.query;
-    console.log(code);
-
     const tokenResponse = await axios.post(
       "https://oauth2.googleapis.com/token",
       {
