@@ -15,6 +15,7 @@
     "axios": "^1.7.9",
     "baobab": "^2.6.1",
     "baobab-react": "^4.0.2",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-async": "^10.0.1",
