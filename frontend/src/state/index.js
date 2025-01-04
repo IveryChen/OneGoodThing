@@ -1,3 +1,9 @@
 import Baobab from "baobab";
 
-export default new Baobab({ user: null });
+const initialState = {
+  user: localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null,
+};
+
+export default new Baobab(initialState);
