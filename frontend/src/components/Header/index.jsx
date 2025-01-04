@@ -14,8 +14,6 @@ class Header extends React.PureComponent {
   render() {
     const { user } = this.props;
 
-    console.log("user", user);
-
     return (
       <Box
         display="flex"
