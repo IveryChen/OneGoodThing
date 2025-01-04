@@ -6,7 +6,8 @@ import Header from "../../components/Header";
 import { withRouter } from "../../utils/withRouter";
 
 import NoteModal from "./NoteModal";
-import { initThreeJS } from "./setUpThreeJS";
+import ThreeJar from "./ThreeJar";
+import Measure from "react-measure";
 
 const StyledJar = styled(Box)`
   height: 640px;
@@ -19,6 +20,8 @@ const StyledJar = styled(Box)`
 `;
 
 class Home extends React.PureComponent {
+  ref = React.createRef();
+  threeInstance = null;
   state = { isOpen: false, note: "" };
 
   onChangeIsOpen = (isOpen) => this.setState({ isOpen });
@@ -27,18 +30,20 @@ class Home extends React.PureComponent {
 
   onClose = () => this.setState({ isOpen: false });
 
-  ref = React.createRef();
-  threeInstance = null;
-
   componentDidMount() {
-    if (this.ref.current) {
-      this.threeInstance = initThreeJS(this.ref.current);
-    }
+    const canvas = this.ref.current;
+    this.threeInstance = new ThreeJar(canvas);
   }
 
+  onResize = ({ bounds: { height, width } }) => {
+    if (this.threeInstance) {
+      this.threeInstance.resize(width, height);
+    }
+  };
+
   componentWillUnmount() {
-    if (this.threeInstance?.cleanup) {
-      this.threeInstance.cleanup();
+    if (this.threeInstance) {
+      this.threeInstance.destroy();
     }
   }
 
@@ -49,7 +54,9 @@ class Home extends React.PureComponent {
       <>
         <Box display="grid">
           <Header onChangeIsOpen={this.onChangeIsOpen} />
-          <StyledJar as="canvas" justifySelf="center" ref={this.ref} />
+          <Measure bounds onResize={this.onResize}>
+            {this.renderBody}
+          </Measure>
         </Box>
         <NoteModal
           data={note}
@@ -61,6 +68,17 @@ class Home extends React.PureComponent {
       </>
     );
   }
+
+  renderBody = ({ measureRef }) => (
+    <StyledJar
+      as="canvas"
+      justifySelf="center"
+      ref={(element) => {
+        this.ref.current = element;
+        measureRef(element);
+      }}
+    />
+  );
 }
 
 export default withRouter(Home);
