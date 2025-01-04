@@ -106,17 +106,7 @@ export const initThreeJS = (canvas) => {
         }
       });
 
-      // Calculate camera and object positioning
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const fov = camera.fov * (Math.PI / 180);
-      const cameraZ = Math.abs(maxDim / Math.tan(fov / 2) / 2);
-      camera.position.z = cameraZ * 1.5;
-
-      const distance = camera.position.z - object.position.z;
-      const heightAtDistance = 2 * Math.tan(fov / 2) * distance;
-      const scale = heightAtDistance / maxDim;
-      object.scale.setScalar(scale * 0.5);
-
+      camera.position.z = 800;
       scene.add(object);
     },
     undefined,
