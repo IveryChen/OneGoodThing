@@ -11,7 +11,9 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 
 import { HDRI, modelURL } from "./constants";
+import { createMaterials } from "./createMaterials";
 import loadModel from "./loadModel";
+import { setupComposer } from "./setUpComposer";
 
 export default class ThreeJar {
   constructor(canvas) {
@@ -29,6 +31,12 @@ export default class ThreeJar {
     this.camera = new PerspectiveCamera();
     this.camera.position.z = 2;
     this.scene = new Scene();
+
+    const { glassMaterial, plasticMaterial } = createMaterials();
+    this.glassMaterial = glassMaterial;
+    this.plasticMaterial = plasticMaterial;
+
+    this.composer = setupComposer(this.renderer, this.scene, this.camera);
 
     this.controls = new OrbitControls(this.camera, canvas);
     this.controls.enablePan = false;
@@ -49,7 +57,7 @@ export default class ThreeJar {
     this.scene.add(ambientLight);
 
     this.rgbeLoader = new RGBELoader();
-    this.rgbeLoader.load(HDRI, function (envMap) {
+    this.rgbeLoader.load(HDRI, (envMap) => {
       envMap.mapping = EquirectangularReflectionMapping;
       this.scene.environment = envMap;
     });
@@ -58,17 +66,24 @@ export default class ThreeJar {
   }
 
   async load(url) {
-    const model = await loadModel(url);
+    const model = await loadModel(url, {
+      glassMaterial: this.glassMaterial,
+      plasticMaterial: this.plasticMaterial,
+    });
     this.camera.position.z = 800;
     this.scene.add(model);
   }
 
   render() {
     this.controls.update();
-    this.renderer.render(this.scene, this.camera);
+    this.composer.render();
   }
 
   destroy() {
+    if (this.composer) {
+      this.composer.dispose();
+    }
+
     if (this.renderer) {
       this.renderer.dispose();
     }
@@ -78,7 +93,24 @@ export default class ThreeJar {
     }
 
     if (this.scene) {
+      this.scene.traverse((object) => {
+        if (object.isMesh) {
+          if (object.geometry) object.geometry.dispose();
+          if (object.material) object.material.dispose();
+        }
+      });
       this.scene.clear();
+    }
+  }
+
+  resize(width, height) {
+    this.renderer.setSize(width, height);
+    this.composer.setSize(width, height);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+
+    if (width > 0 && height > 0) {
+      this.renderer.setAnimationLoop(this.render.bind(this));
     }
   }
 }
