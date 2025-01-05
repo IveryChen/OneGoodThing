@@ -25,10 +25,10 @@ class Header extends React.PureComponent {
         display="flex"
         height={56}
         justifyContent="space-between"
-        p="8px"
+        p="12px"
         width="100%"
       >
-        <Box>
+        <Box display="grid" gridTemplateRows="auto 1fr">
           <Box
             as={LiaThLargeSolid}
             color={theme.beige}
