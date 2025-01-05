@@ -12,10 +12,6 @@ import Note from "./Note";
 import Header from "./Header";
 
 class Notes extends React.PureComponent {
-  onClick = () => {
-    this.props.navigate("/home");
-  };
-
   render() {
     const token = localStorage.getItem("token");
 

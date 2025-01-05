@@ -5,6 +5,10 @@ import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
 
 export default class Header extends React.PureComponent {
+  onClick = () => {
+    this.props.navigate("/home");
+  };
+
   render() {
     return (
       <Box
