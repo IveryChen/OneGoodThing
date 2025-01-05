@@ -11,8 +11,7 @@ const StyledBox = styled(Box)`
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: -8px 8px ${theme.darkbrown};
-    transform: translate(8px, -8px);
+    filter: brightness(0.9);
   }
 `;
 
