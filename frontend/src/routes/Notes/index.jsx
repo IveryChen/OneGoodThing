@@ -28,7 +28,7 @@ class Notes extends React.PureComponent {
       </Async>
     );
   }
-  renderBody = ({ data: notes, error, isPending }) => {
+  renderBody = ({ data: notes, error, isPending, reload }) => {
     const { editId } = this.state;
 
     if (isPending)
@@ -65,6 +65,7 @@ class Notes extends React.PureComponent {
                 editId={editId}
                 key={note._id}
                 onChangeEditId={this.onChangeEditId}
+                onNoteUpdated={reload}
               />
             ))}
           </Box>
@@ -72,6 +73,7 @@ class Notes extends React.PureComponent {
             data={notes[editId]}
             isOpen={editId}
             onClose={this.onClose}
+            onNoteUpdated={reload}
           />
         </Box>
       );
