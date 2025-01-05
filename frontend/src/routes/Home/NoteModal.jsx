@@ -4,6 +4,7 @@ import React from "react";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
 import { stickies, theme } from "../../constants/constants";
+import submitNote from "../../utils/submitNote";
 
 const StyledInput = styled.textarea`
   background-color: ${stickies.lightyellow};
@@ -25,7 +26,9 @@ export default class NoteModal extends React.PureComponent {
   };
 
   onClick = () => {
-    // submitNote(note);
+    const token = localStorage.getItem("token");
+
+    submitNote(this.props.data, token);
     this.props.onChangeIsOpen(false);
   };
 
