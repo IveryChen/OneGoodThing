@@ -1,6 +1,7 @@
 import { map } from "lodash";
 import React from "react";
 import { Async } from "react-async";
+import { LiaArrowLeftSolid } from "react-icons/lia";
 
 import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
@@ -33,14 +34,31 @@ class Notes extends React.PureComponent {
         <Box
           display="grid"
           gap={16}
-          gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
           height="100%"
-          overflow="auto"
+          overflow="hidden"
           p={16}
+          pb={0}
         >
-          {map(notes, (note) => (
-            <Note data={note} key={note._id} />
-          ))}
+          <Box
+            alignSelf="center"
+            as={LiaArrowLeftSolid}
+            color={theme.beige}
+            justifySelf="start"
+            size={32}
+            width="100%"
+          />
+          <Box
+            display="grid"
+            gap={16}
+            gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
+            height="100%"
+            overflow="auto"
+            pb={16}
+          >
+            {map(notes, (note) => (
+              <Note data={note} key={note._id} />
+            ))}
+          </Box>
         </Box>
       );
     }
