@@ -3,6 +3,7 @@ import { Async } from "react-async";
 
 import { fetchNotes } from "../../api/fetchNotes";
 import Text from "../../components/Text";
+import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
 import Note from "./Note";
@@ -20,7 +21,7 @@ class Notes extends React.PureComponent {
   renderBody = ({ data: notes, error, isPending }) => {
     if (isPending)
       return (
-        <Text color="gray" p={16}>
+        <Text color={theme.beige} p={16}>
           Loading...
         </Text>
       );

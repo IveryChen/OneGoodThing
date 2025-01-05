@@ -12,7 +12,7 @@ const StyledBox = styled(Box)`
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: -8px 8px ${theme.lightgray};
+    box-shadow: -8px 8px ${theme.darkbrown};
     transform: translate(8px, -8px);
   }
 `;
@@ -27,9 +27,11 @@ export default class Note extends React.PureComponent {
 
     return (
       <Box
+        alignContent="start"
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
         gap={16}
+        gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
+        height="100%"
         p={16}
       >
         {map(data, (note) => (
@@ -42,13 +44,13 @@ export default class Note extends React.PureComponent {
             display="grid"
             gridTemplateRows="auto 1fr"
             key={note._id}
-            p={12}
             overflow="hidden"
+            p={12}
           >
-            <Text color="lightgray" justifySelf="start" fontSize={12}>
+            <Text color={theme.lightbrown} fontSize={12} justifySelf="start">
               {new Date(note.createdAt).toLocaleDateString()}
             </Text>
-            <Text overflow="auto" color="gray">
+            <Text color={theme.darkbrown} overflow="auto">
               {note.text}
             </Text>
           </StyledBox>
