@@ -11,12 +11,10 @@ class GoogleCallback extends React.PureComponent {
   loadUser = async () => {
     const cachedData = localStorage.getItem("user");
     if (cachedData) {
-      console.log("Returning cached data");
       return JSON.parse(cachedData);
     }
 
     if (this.requestMade.current) {
-      console.log("Request in progress, waiting...");
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const newCachedData = localStorage.getItem("user");
