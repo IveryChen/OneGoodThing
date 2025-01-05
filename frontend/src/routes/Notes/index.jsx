@@ -12,6 +12,10 @@ import { withRouter } from "../../utils/withRouter";
 import Note from "./Note";
 
 class Notes extends React.PureComponent {
+  onClick = () => {
+    this.props.navigate("/home");
+  };
+
   render() {
     const token = localStorage.getItem("token");
 
@@ -44,6 +48,7 @@ class Notes extends React.PureComponent {
             as={LiaArrowLeftSolid}
             color={theme.beige}
             justifySelf="start"
+            onClick={this.onClick}
             size={32}
             width="100%"
           />
