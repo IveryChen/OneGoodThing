@@ -124,4 +124,21 @@ app.get("/api/notes", authMiddleware, async (req, res) => {
   }
 });
 
+app.put("/api/notes/:noteId", authMiddleware, async (req, res) => {
+  try {
+    const { noteId } = req.params;
+    const { text } = req.body;
+    const userEmail = req.user.email;
+    const user = await User.findOne({ email: userEmail }).populate("notes");
+
+    if (!user) throw new Error("User not found");
+
+    const note = await Note.findByIdAndUpdate(noteId, { text }, { new: true });
+
+    res.json(note);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update note" });
+  }
+});
+
 app.listen(3000);
