@@ -141,4 +141,24 @@ app.put("/api/notes/:noteId", authMiddleware, async (req, res) => {
   }
 });
 
+app.delete("/api/notes/:noteId", authMiddleware, async (req, res) => {
+  try {
+    const { noteId } = req.params;
+    const userEmail = req.user.email;
+    const user = await User.findOne({ email: userEmail }).populate("notes");
+
+    if (!user) throw new Error("User not found");
+
+    await Note.findByIdAndDelete(noteId);
+
+    await User.findByIdAndUpdate(user._id, {
+      $pull: { notes: noteId },
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete note" });
+  }
+});
+
 app.listen(3000);
