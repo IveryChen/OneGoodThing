@@ -1,14 +1,16 @@
 export const theme = {
-  beige: "#C5B6AF",
-  oatmeal: "#e7e5e3",
+  beige: "#EBE3D6",
+  darkbrown: "#1C1915",
   darkgray: "#414141",
+  lightbrown: "#7E7064",
   lightgray: "#737373",
+  oatmeal: "#E7E5E3",
 };
 
 export const stickies = {
-  yellow: "#fff740",
-  lightyellow: "#feff9c",
-  blue: "#7afcff",
-  pink: "#ff65a3",
-  lightpink: "#ff7eb9",
+  yellow: "#FFF740",
+  lightyellow: "#FEFF9C",
+  blue: "#7AFCFF",
+  pink: "#FF65A3",
+  lightpink: "#FF7EB9",
 };
