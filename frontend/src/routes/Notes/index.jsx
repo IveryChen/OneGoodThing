@@ -1,7 +1,6 @@
 import { map } from "lodash";
 import React from "react";
 import { Async } from "react-async";
-import { LiaArrowLeftSolid } from "react-icons/lia";
 
 import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
@@ -10,6 +9,7 @@ import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
 import Note from "./Note";
+import Header from "./Header";
 
 class Notes extends React.PureComponent {
   onClick = () => {
@@ -44,15 +44,7 @@ class Notes extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Box
-            alignSelf="center"
-            as={LiaArrowLeftSolid}
-            color={theme.beige}
-            cursor="pointer"
-            justifySelf="start"
-            onClick={this.onClick}
-            size={32}
-          />
+          <Header />
           <Box
             alignContent="start"
             display="grid"
