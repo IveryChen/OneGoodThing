@@ -19,6 +19,8 @@ const StyledInput = styled.textarea`
 `;
 
 export default class EditNoteModal extends React.PureComponent {
+  state = { isPending: false };
+
   handleChange = (e) => {
     const value = this.props.toUpperCase
       ? e.target.value.toUpperCase()
@@ -26,15 +28,24 @@ export default class EditNoteModal extends React.PureComponent {
     this.props.onChangeNote(value);
   };
 
-  onClick = () => {
+  handleSubmit = async () => {
     const token = localStorage.getItem("token");
 
-    submitNote(this.props.data, token);
-    this.props.onChangeIsOpen(false);
+    this.setState({ isPending: true });
+
+    try {
+      await submitNote(this.props.data, token);
+      this.props.onChangeIsOpen(false);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setState({ isPending: false });
+    }
   };
 
   render() {
     const { data, isOpen, onClose } = this.props;
+    const { isPending } = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -47,9 +58,10 @@ export default class EditNoteModal extends React.PureComponent {
         />
         <IconButton
           color={theme.darkgray}
+          disabled={isPending}
           justifyItems="center"
           label="SUBMIT"
-          onClick={this.onClick}
+          onClick={this.handleSubmit}
         />
       </Modal>
     );
