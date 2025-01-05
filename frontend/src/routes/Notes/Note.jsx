@@ -29,7 +29,6 @@ export default class Note extends React.PureComponent {
         borderWidth={1}
         display="grid"
         gridTemplateRows="auto 1fr"
-        overflow="hidden"
         p={12}
       >
         <Text color={theme.lightbrown} fontSize={12} justifySelf="start">

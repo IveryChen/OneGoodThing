@@ -34,6 +34,8 @@ class Notes extends React.PureComponent {
           display="grid"
           gap={16}
           gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
+          height="100%"
+          overflow="auto"
           p={16}
         >
           {map(notes, (note) => (
