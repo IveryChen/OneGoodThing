@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { Async } from "react-async";
 
+import { API_URL } from "../../constants/config";
 import state from "../../state";
 import { withRouter } from "../../utils/withRouter";
 
@@ -30,7 +31,7 @@ class GoogleCallback extends React.PureComponent {
     const code = urlParams.get("code");
 
     const response = await fetch(
-      `http://localhost:3000/auth/google/callback?code=${code}`,
+      `${API_URL}/auth/google/callback?code=${code}`,
       {
         method: "GET",
         headers: {
