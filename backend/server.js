@@ -8,7 +8,10 @@ import mongoose from "mongoose";
 import Note from "./models/Note.js";
 import User from "./models/User.js";
 
-dotenv.config();
+dotenv.config({
+  path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
+});
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("Connected to MongoDB"))
