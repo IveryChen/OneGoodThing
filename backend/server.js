@@ -111,6 +111,17 @@ app.post("/api/notes", authMiddleware, async (req, res) => {
   }
 });
 
-// app.get('/api/notes'...
+app.get("/api/notes", authMiddleware, async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+    const user = await User.findOne({ email: userEmail }).populate("notes");
+
+    if (!user) throw new Error("User not found");
+
+    res.json(user.notes);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create note" });
+  }
+});
 
 app.listen(3000);
