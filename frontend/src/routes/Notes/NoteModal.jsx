@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+import { deleteNote } from "../../api/deleteNote";
 import updateNote from "../../api/updateNote";
 import Box from "../../components/Box";
 import Modal from "../../components/Modal";
@@ -63,6 +64,22 @@ export default class NoteModal extends React.PureComponent {
     }
   };
 
+  handleDelete = async () => {
+    const token = localStorage.getItem("token");
+    const { data, onNoteUpdated } = this.props;
+
+    this.setState({ isPending: true });
+    try {
+      await deleteNote(data._id, token);
+      onNoteUpdated();
+      this.props.onClose();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setState({ isPending: false });
+    }
+  };
+
   render() {
     const { data, isOpen, onClose } = this.props;
     const { edit, isPending, note } = this.state;
@@ -92,8 +109,10 @@ export default class NoteModal extends React.PureComponent {
           />
           <IconButton
             color={theme.darkgray}
+            disabled={isPending}
             justifyItems="center"
             label="DELETE"
+            onClick={this.handleDelete}
           />
         </Box>
       </Modal>
