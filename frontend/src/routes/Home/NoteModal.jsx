@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import React from "react";
 
+import submitNote from "../../api/submitNote";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
 import { stickies, theme } from "../../constants/constants";
-import submitNote from "../../utils/submitNote";
 
 const StyledInput = styled.textarea`
   background-color: ${stickies.lightyellow};
