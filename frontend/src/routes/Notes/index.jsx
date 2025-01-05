@@ -12,6 +12,10 @@ import Note from "./Note";
 import Header from "./Header";
 
 class Notes extends React.PureComponent {
+  state = { editMode: false };
+
+  onChangeEditMode = (editMode) => this.setState(editMode);
+
   render() {
     const token = localStorage.getItem("token");
 
@@ -22,9 +26,11 @@ class Notes extends React.PureComponent {
     );
   }
   renderBody = ({ data: notes, error, isPending }) => {
+    const { editMode } = this.state;
+
     if (isPending)
       return (
-        <Text color={theme.beige} p="12px">
+        <Text color={theme.darkgray} p="12px">
           Loading...
         </Text>
       );
@@ -40,7 +46,10 @@ class Notes extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Header />
+          <Header
+            editMode={editMode}
+            onChangeEditMode={this.onChangeEditMode}
+          />
           <Box
             alignContent="start"
             display="grid"

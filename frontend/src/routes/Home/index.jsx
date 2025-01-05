@@ -5,7 +5,7 @@ import Box from "../../components/Box";
 import Header from "../../components/Header";
 import { withRouter } from "../../utils/withRouter";
 
-import NoteModal from "./NoteModal";
+import EditNoteModal from "./EditNoteModal";
 import ThreeJar from "./ThreeJar";
 import Measure from "react-measure";
 
@@ -58,7 +58,7 @@ class Home extends React.PureComponent {
             {this.renderBody}
           </Measure>
         </Box>
-        <NoteModal
+        <EditNoteModal
           data={note}
           isOpen={isOpen}
           onChangeIsOpen={this.onChangeIsOpen}

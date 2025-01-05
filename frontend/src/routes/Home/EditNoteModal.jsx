@@ -18,7 +18,7 @@ const StyledInput = styled.textarea`
   width: 320px;
 `;
 
-export default class NoteModal extends React.PureComponent {
+export default class EditNoteModal extends React.PureComponent {
   handleChange = (e) => {
     const value = this.props.toUpperCase
       ? e.target.value.toUpperCase()
