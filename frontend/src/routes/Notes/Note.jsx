@@ -4,10 +4,12 @@ import { map } from "lodash";
 
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import { theme, stickies } from "../../constants/constants";
+import { theme } from "../../constants/constants";
+
+import chooseColor from "./chooseColour";
 
 const StyledBox = styled(Box)`
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 
   &:hover {
     box-shadow: -8px 8px ${theme.lightgray};
@@ -19,23 +21,35 @@ export default class Note extends React.PureComponent {
   render() {
     const { data } = this.props;
 
+    if (!data) {
+      return null;
+    }
+
     return (
       <Box
         display="grid"
-        gridTemplateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
         gap={16}
         p={16}
       >
         {map(data, (note) => (
           <StyledBox
             aspectRatio={1}
-            backgroundColor={stickies.lightyellow}
+            backgroundColor={chooseColor(new Date(note.createdAt))}
+            borderColor="gray"
+            borderStyle="solid"
+            borderWidth={1}
+            display="grid"
+            gridTemplateRows="auto 1fr"
             key={note._id}
-            p={16}
+            p={12}
+            overflow="hidden"
           >
-            <Text color="gray">{note.text}</Text>
-            <Text color="gray" fontSize="sm">
+            <Text color="lightgray" justifySelf="start" fontSize={12}>
               {new Date(note.createdAt).toLocaleDateString()}
+            </Text>
+            <Text overflow="auto" color="gray">
+              {note.text}
             </Text>
           </StyledBox>
         ))}

@@ -6,9 +6,9 @@ export const theme = {
 };
 
 export const stickies = {
-  lightpink: "#ff7eb9",
+  yellow: "#fff740",
   lightyellow: "#feff9c",
   blue: "#7afcff",
   pink: "#ff65a3",
-  yellow: "#fff740",
+  lightpink: "#ff7eb9",
 };

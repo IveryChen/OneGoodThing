@@ -5,9 +5,10 @@ import submitNote from "../../api/submitNote";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
 import { stickies, theme } from "../../constants/constants";
+import chooseColor from "../Notes/chooseColour";
 
 const StyledInput = styled.textarea`
-  background-color: ${stickies.lightyellow};
+  background-color: ${chooseColor()};
   border-style: none;
   color: black;
   font-family: inherit;
