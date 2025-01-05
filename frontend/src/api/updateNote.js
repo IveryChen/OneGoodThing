@@ -1,5 +1,7 @@
+import { API_URL } from "../constants/config";
+
 export default async function updateNote(noteId, text, token) {
-  const response = await fetch(`http://localhost:3000/api/notes/${noteId}`, {
+  const response = await fetch(`${API_URL}/api/notes/${noteId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,8 @@
+import { API_URL } from "../constants/config";
+
 export default async function submitNote(text, token) {
   try {
-    const response = await fetch("http://localhost:3000/api/notes", {
+    const response = await fetch(`${API_URL}/api/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

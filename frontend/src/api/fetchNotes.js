@@ -1,8 +1,10 @@
 import { keyBy } from "lodash";
 
+import { API_URL } from "../constants/config";
+
 export async function fetchNotes(props) {
   const { token } = props;
-  const response = await fetch("http://localhost:3000/api/notes", {
+  const response = await fetch(`${API_URL}/api/notes`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
