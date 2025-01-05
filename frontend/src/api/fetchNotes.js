@@ -1,3 +1,5 @@
+import { keyBy } from "lodash";
+
 export async function fetchNotes(props) {
   const { token } = props;
   const response = await fetch("http://localhost:3000/api/notes", {
@@ -10,5 +12,7 @@ export async function fetchNotes(props) {
     throw new Error("Failed to fetch notes");
   }
 
-  return response.json();
+  const data = await response.json();
+
+  return keyBy(data, "_id");
 }

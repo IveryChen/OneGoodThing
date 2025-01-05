@@ -16,6 +16,8 @@ const StyledBox = styled(Box)`
 `;
 
 export default class Note extends React.PureComponent {
+  onClick = () => this.props.onChangeEditId(this.props.data._id);
+
   render() {
     const { data } = this.props;
 
@@ -25,6 +27,7 @@ export default class Note extends React.PureComponent {
         backgroundColor={chooseColor(new Date(data.createdAt))}
         display="grid"
         gridTemplateRows="auto 1fr"
+        onClick={this.onClick}
         p={12}
       >
         <Text color={theme.lightbrown} fontSize={12} justifySelf="start">

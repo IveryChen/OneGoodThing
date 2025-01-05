@@ -8,13 +8,16 @@ import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
-import Note from "./Note";
 import Header from "./Header";
+import Note from "./Note";
+import NoteModal from "./NoteModal";
 
 class Notes extends React.PureComponent {
-  state = { editMode: false };
+  state = { editId: null };
 
-  onChangeEditMode = (editMode) => this.setState(editMode);
+  onChangeEditId = (editId) => this.setState({ editId });
+
+  onClose = () => this.setState({ editId: null });
 
   render() {
     const token = localStorage.getItem("token");
@@ -26,7 +29,7 @@ class Notes extends React.PureComponent {
     );
   }
   renderBody = ({ data: notes, error, isPending }) => {
-    const { editMode } = this.state;
+    const { editId } = this.state;
 
     if (isPending)
       return (
@@ -46,10 +49,7 @@ class Notes extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Header
-            editMode={editMode}
-            onChangeEditMode={this.onChangeEditMode}
-          />
+          <Header />
           <Box
             alignContent="start"
             display="grid"
@@ -60,9 +60,19 @@ class Notes extends React.PureComponent {
             pb="16px"
           >
             {map(notes, (note) => (
-              <Note data={note} key={note._id} />
+              <Note
+                data={note}
+                editId={editId}
+                key={note._id}
+                onChangeEditId={this.onChangeEditId}
+              />
             ))}
           </Box>
+          <NoteModal
+            data={notes[editId]}
+            isOpen={editId}
+            onClose={this.onClose}
+          />
         </Box>
       );
     }
