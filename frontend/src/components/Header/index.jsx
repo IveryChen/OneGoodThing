@@ -31,20 +31,20 @@ class Header extends React.PureComponent {
         <Box display="grid" gridTemplateRows="auto 1fr">
           <Box
             as={LiaThLargeSolid}
-            color={theme.beige}
+            color={theme.darkgray}
             cursor="pointer"
             onClick={this.openNotes}
             size={32}
           />
           <Box
             as={LiaPlusSolid}
-            color={theme.beige}
+            color={theme.darkgray}
             cursor="pointer"
             onClick={this.openModal}
             size={32}
           />
         </Box>
-        <Text color={theme.beige} textTransform="uppercase">
+        <Text color={theme.darkgray} textTransform="uppercase">
           {user.name}
         </Text>
       </Box>

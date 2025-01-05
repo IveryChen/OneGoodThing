@@ -46,7 +46,7 @@ export default class NoteModal extends React.PureComponent {
           value={data}
         />
         <IconButton
-          color={theme.beige}
+          color={theme.darkgray}
           justifyItems="center"
           label="SUBMIT"
           onClick={this.onClick}

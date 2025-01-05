@@ -1,5 +1,6 @@
 export const theme = {
   beige: "#EBE3D6",
+  concrete: "#D5D3CA",
   darkbrown: "#1C1915",
   darkgray: "#414141",
   lightbrown: "#7E7064",

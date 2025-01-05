@@ -23,9 +23,6 @@ export default class Note extends React.PureComponent {
       <StyledBox
         aspectRatio={1}
         backgroundColor={chooseColor(new Date(data.createdAt))}
-        borderColor="gray"
-        borderStyle="solid"
-        borderWidth={1}
         display="grid"
         gridTemplateRows="auto 1fr"
         p={12}
@@ -33,7 +30,7 @@ export default class Note extends React.PureComponent {
         <Text color={theme.lightbrown} fontSize={12} justifySelf="start">
           {new Date(data.createdAt).toLocaleDateString()}
         </Text>
-        <Text color={theme.darkbrown} overflowX="hidden">
+        <Text color={theme.darkgray} overflowX="hidden">
           {data.text}
         </Text>
       </StyledBox>
