@@ -12,6 +12,7 @@
 
 # env
 .env
+.env.production
 
 # Other unwanted files
 *.pyc
