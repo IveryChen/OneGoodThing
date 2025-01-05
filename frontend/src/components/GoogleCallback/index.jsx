@@ -6,16 +6,31 @@ import state from "../../state";
 import { withRouter } from "../../utils/withRouter";
 
 class GoogleCallback extends React.PureComponent {
-  loadUser = async () => {
-    if (localStorage.getItem("user")) {
-      const cachedData = JSON.parse(localStorage.getItem("user"));
-      state.select("user").set(cachedData);
+  requestMade = React.createRef(false);
 
-      return cachedData;
+  loadUser = async () => {
+    const cachedData = localStorage.getItem("user");
+    if (cachedData) {
+      console.log("Returning cached data");
+      return JSON.parse(cachedData);
     }
+
+    if (this.requestMade.current) {
+      console.log("Request in progress, waiting...");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const newCachedData = localStorage.getItem("user");
+      if (newCachedData) {
+        return JSON.parse(newCachedData);
+      }
+      return null;
+    }
+
+    this.requestMade.current = true;
 
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+
     const response = await fetch(
       `http://localhost:3000/auth/google/callback?code=${code}`,
       {
@@ -26,15 +41,20 @@ class GoogleCallback extends React.PureComponent {
       }
     );
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error("Auth failed");
+      throw new Error(data.error || "Failed to authenticate");
     }
 
-    const userData = await response.json();
-    localStorage.setItem("user", JSON.stringify(userData));
+    const { user, token } = data;
+
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+
     state.select("user").set(JSON.parse(localStorage.getItem("user")));
 
-    return userData;
+    return user;
   };
 
   render() {
