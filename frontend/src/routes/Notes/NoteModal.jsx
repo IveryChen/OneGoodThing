@@ -24,6 +24,18 @@ const StyledInput = styled.textarea`
 export default class NoteModal extends React.PureComponent {
   state = { edit: false, note: "" };
 
+  componentDidMount() {
+    if (this.props.data) {
+      this.setState({ note: this.props.data.text });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.data && this.props.data) {
+      this.setState({ note: this.props.data.text });
+    }
+  }
+
   onChangeNote = (note) => this.setState({ note });
 
   toggleEdit = () => this.setState((prevState) => ({ edit: !prevState.edit }));
@@ -35,15 +47,23 @@ export default class NoteModal extends React.PureComponent {
     this.onChangeNote(value);
   };
 
-  onClick = () => {
+  handleSubmit = async () => {
     const token = localStorage.getItem("token");
+    const { data, onNoteUpdated } = this.props;
+    const { note } = this.state;
 
-    updateNote(this.props.note, token);
+    try {
+      await updateNote(data._id, note, token);
+      onNoteUpdated();
+      this.props.onClose();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   render() {
-    const { data, isOpen, note, onClose } = this.props;
-    const { edit } = this.state;
+    const { data, isOpen, onClose } = this.props;
+    const { edit, note } = this.state;
 
     if (!data) {
       return null;
@@ -58,20 +78,19 @@ export default class NoteModal extends React.PureComponent {
             readOnly={!edit}
             required={true}
             type="text"
-            value={edit ? note : data.text}
+            value={note}
           />
           <IconButton
             bg={edit ? theme.darkgray : "transparent"}
             color={edit ? theme.beige : theme.darkgray}
             justifyItems="center"
-            label="EDIT"
-            onClick={this.toggleEdit}
+            label={edit ? "SAVE" : "EDIT"}
+            onClick={edit ? this.handleSubmit : this.toggleEdit}
           />
           <IconButton
             color={theme.darkgray}
             justifyItems="center"
             label="DELETE"
-            //   onClick={this.onClick}
           />
         </Box>
       </Modal>
