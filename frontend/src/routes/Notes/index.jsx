@@ -1,7 +1,9 @@
+import { map } from "lodash";
 import React from "react";
 import { Async } from "react-async";
 
 import { fetchNotes } from "../../api/fetchNotes";
+import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
@@ -27,7 +29,18 @@ class Notes extends React.PureComponent {
       );
     if (error) return <Text p={16}>Error: {error.message}</Text>;
     if (notes) {
-      return <Note data={notes} />;
+      return (
+        <Box
+          display="grid"
+          gap={16}
+          gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
+          p={16}
+        >
+          {map(notes, (note) => (
+            <Note data={note} key={note._id} />
+          ))}
+        </Box>
+      );
     }
   };
 }
