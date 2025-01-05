@@ -63,6 +63,7 @@ app.get("/auth/google/callback", async (req, res) => {
 
     if (!user) {
       user = await User.create({
+        name: userInfo.data.given_name,
         email: userInfo.data.email,
         googleId: userInfo.data.id,
       });

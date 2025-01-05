@@ -29,7 +29,7 @@ class Header extends React.PureComponent {
           size={32}
         />
         <Text color={theme.darkgray} textTransform="uppercase">
-          {user.given_name}
+          {user.name}
         </Text>
       </Box>
     );
