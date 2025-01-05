@@ -37,6 +37,7 @@ class Notes extends React.PureComponent {
       return (
         <Box
           display="grid"
+          gridTemplateRows="auto 1fr"
           gap="12px"
           height="100%"
           overflow="hidden"
@@ -53,6 +54,7 @@ class Notes extends React.PureComponent {
             size={32}
           />
           <Box
+            alignContent="start"
             display="grid"
             gap="16px"
             gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
