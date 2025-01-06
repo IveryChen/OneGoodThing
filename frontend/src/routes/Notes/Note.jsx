@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import React from "react";
+import { readableColor } from "polished";
 
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import { theme } from "../../constants/constants";
 
 const StyledBox = styled(Box)`
   transition: all 0.2s ease;
@@ -18,6 +18,7 @@ export default class Note extends React.PureComponent {
 
   render() {
     const { data } = this.props;
+    const readable = readableColor(data.color);
 
     return (
       <StyledBox
@@ -28,10 +29,10 @@ export default class Note extends React.PureComponent {
         onClick={this.onClick}
         p={12}
       >
-        <Text color={theme.lightbrown} fontSize={12} justifySelf="start">
+        <Text color={readable} fontSize={12} justifySelf="start">
           {new Date(data.createdAt).toLocaleDateString()}
         </Text>
-        <Text color={theme.darkgray} overflowX="hidden">
+        <Text color={readable} overflowX="hidden">
           {data.text}
         </Text>
       </StyledBox>
