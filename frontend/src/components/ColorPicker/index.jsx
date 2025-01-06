@@ -15,6 +15,7 @@ export default class ColorPicker extends React.PureComponent {
         {map(stickiesColours, (hex) => (
           <Color
             hex={hex}
+            key={hex}
             onChangeColor={onChangeColor}
             selectedColor={selectedColor}
           />
