@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import React from "react";
 
 import submitNote from "../../api/submitNote";
+import ColorPicker from "../../components/ColorPicker";
+import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
 import { stickies, theme } from "../../constants/constants";
@@ -19,7 +21,7 @@ const StyledInput = styled.textarea`
 `;
 
 export default class EditNoteModal extends React.PureComponent {
-  state = { isPending: false };
+  state = { color: null, isPending: false };
 
   handleChange = (e) => {
     const value = this.props.toUpperCase
@@ -43,26 +45,34 @@ export default class EditNoteModal extends React.PureComponent {
     }
   };
 
+  onChangeColor = (color) => this.setState({ color });
+
   render() {
     const { data, isOpen, onClose } = this.props;
-    const { isPending } = this.state;
+    const { color, isPending } = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <StyledInput
-          background={stickies.lightyellow}
-          onChange={this.handleChange}
-          required={true}
-          type="text"
-          value={data}
-        />
-        <IconButton
-          color={theme.darkgray}
-          disabled={isPending}
-          justifyItems="center"
-          label="SUBMIT"
-          onClick={this.handleSubmit}
-        />
+        <Box display="grid" gap="8px">
+          <StyledInput
+            background={stickies.lightyellow}
+            onChange={this.handleChange}
+            required={true}
+            type="text"
+            value={data}
+          />
+          <ColorPicker
+            onChangeColor={this.onChangeColor}
+            selectedColor={color}
+          />
+          <IconButton
+            color={theme.darkgray}
+            disabled={isPending}
+            justifyItems="center"
+            label="SUBMIT"
+            onClick={this.handleSubmit}
+          />
+        </Box>
       </Modal>
     );
   }
