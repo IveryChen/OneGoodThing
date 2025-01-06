@@ -1,6 +1,6 @@
 import { API_URL } from "../constants/config";
 
-export default async function submitNote(text, token) {
+export default async function submitNote(text, color, token) {
   try {
     const response = await fetch(`${API_URL}/api/notes`, {
       method: "POST",
@@ -8,7 +8,7 @@ export default async function submitNote(text, token) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, color }),
     });
 
     return response.json();

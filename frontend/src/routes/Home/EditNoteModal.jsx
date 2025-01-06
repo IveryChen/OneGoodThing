@@ -6,11 +6,11 @@ import ColorPicker from "../../components/ColorPicker";
 import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
-import { stickies, theme } from "../../constants/constants";
+import { theme } from "../../constants/constants";
 import chooseColor from "../Notes/chooseColour";
 
 const StyledInput = styled.textarea`
-  background-color: ${chooseColor()};
+  background-color: ${(props) => props.backgroundColor || chooseColor()};
   border-style: none;
   color: black;
   font-family: inherit;
@@ -21,7 +21,7 @@ const StyledInput = styled.textarea`
 `;
 
 export default class EditNoteModal extends React.PureComponent {
-  state = { color: null, isPending: false };
+  state = { color: chooseColor(), isPending: false };
 
   handleChange = (e) => {
     const value = this.props.toUpperCase
@@ -31,12 +31,13 @@ export default class EditNoteModal extends React.PureComponent {
   };
 
   handleSubmit = async () => {
+    const { color } = this.state;
     const token = localStorage.getItem("token");
 
     this.setState({ isPending: true });
 
     try {
-      await submitNote(this.props.data, token);
+      await submitNote(this.props.data, color, token);
       this.props.onChangeIsOpen(false);
     } catch (e) {
       console.error(e);
@@ -55,7 +56,7 @@ export default class EditNoteModal extends React.PureComponent {
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
           <StyledInput
-            background={stickies.lightyellow}
+            backgroundColor={color}
             onChange={this.handleChange}
             required={true}
             type="text"

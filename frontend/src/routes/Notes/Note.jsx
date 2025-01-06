@@ -5,8 +5,6 @@ import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 
-import chooseColor from "./chooseColour";
-
 const StyledBox = styled(Box)`
   transition: all 0.2s ease;
 
@@ -24,7 +22,7 @@ export default class Note extends React.PureComponent {
     return (
       <StyledBox
         aspectRatio={1}
-        backgroundColor={chooseColor(new Date(data.createdAt))}
+        backgroundColor={data.color}
         display="grid"
         gridTemplateRows="auto 1fr"
         onClick={this.onClick}

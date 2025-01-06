@@ -91,7 +91,7 @@ app.get("/auth/google/callback", async (req, res) => {
 // Protected notes endpoint
 app.post("/api/notes", authMiddleware, async (req, res) => {
   try {
-    const { text } = req.body;
+    const { text, color } = req.body;
     const userEmail = req.user.email;
 
     const user = await User.findOne({ email: userEmail });
@@ -99,6 +99,7 @@ app.post("/api/notes", authMiddleware, async (req, res) => {
 
     const note = new Note({
       text,
+      color,
       userId: user._id,
     });
 
