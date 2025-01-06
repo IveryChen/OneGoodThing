@@ -9,7 +9,8 @@ const StyledBox = styled(Box)`
   transition: all 0.2s ease;
 
   &:hover {
-    filter: brightness(0.9);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
 `;
 
@@ -22,6 +23,7 @@ export default class Note extends React.PureComponent {
 
     return (
       <StyledBox
+        boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
         aspectRatio={1}
         backgroundColor={data.color}
         display="grid"
