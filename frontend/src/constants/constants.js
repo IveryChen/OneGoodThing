@@ -15,3 +15,11 @@ export const stickies = {
   pink: "#FF65A3",
   lightpink: "#FF7EB9",
 };
+
+export const stickiesColours = [
+  "#FFF740",
+  "#FEFF9C",
+  "#7AFCFF",
+  "#FF65A3",
+  "#FF7EB9",
+];
