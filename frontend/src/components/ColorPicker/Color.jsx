@@ -18,7 +18,7 @@ export default class Color extends React.PureComponent {
         key={hex}
         onClick={this.onClick}
         outline={selectedColor === hex ? `2px solid ${theme.darkgray}` : "none"}
-        size={24}
+        size={16}
       />
     );
   }

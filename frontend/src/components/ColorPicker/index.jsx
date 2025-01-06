@@ -11,7 +11,7 @@ export default class ColorPicker extends React.PureComponent {
     const { selectedColor, onChangeColor } = this.props;
 
     return (
-      <Box display="flex" gap="8px" p="2px">
+      <Box display="flex" gap="8px" justifyContent="space-evenly">
         {map(stickiesColours, (hex) => (
           <Color
             hex={hex}
