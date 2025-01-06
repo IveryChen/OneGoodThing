@@ -11,15 +11,29 @@ export const theme = {
 export const stickies = {
   yellow: "#FFF740",
   lightyellow: "#FEFF9C",
-  blue: "#7AFCFF",
-  pink: "#FF65A3",
-  lightpink: "#FF7EB9",
+  lightpink: "#FFB0D1",
+  cyan: "#7AFCFF",
+  pink: "#FF7EB9",
+  lightblue: "#ABBFFB",
+  blue: "#2FAFC9",
+  lightpurple: "#D4AEFF",
+  purple: "#6947A8",
+  orange: "#FFBF9F",
+  salmon: "#FF959B",
+  lightgreen: "#D5FFB0",
 };
 
 export const stickiesColours = [
   "#FFF740",
   "#FEFF9C",
   "#7AFCFF",
-  "#FF65A3",
   "#FF7EB9",
+  "#FFB0D1",
+  "#ABBFFB",
+  "#2FAFC9",
+  "#D4AEFF",
+  "#6947A8",
+  "#FFBF9F",
+  "#FF959B",
+  "#D5FFB0",
 ];
