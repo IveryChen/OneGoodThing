@@ -55,7 +55,7 @@ const StyledNote = styled(Box)`
     height: 100%;
     left: 0;
     mix-blend-mode: multiply;
-    opacity: 0.6;
+    opacity: 0.5;
     pointer-events: none;
     position: absolute;
     top: 0;
