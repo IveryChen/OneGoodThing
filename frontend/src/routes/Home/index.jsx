@@ -16,12 +16,8 @@ class Home extends React.PureComponent {
 
     return (
       <Box display="grid" gridTemplateRows="auto 1fr">
-        <Header onChangeIsOpen={this.onChangeIsOpen} />
-        <EditNote
-          data={note}
-          onChangeNote={this.onChangeNote}
-          onClose={this.onClose}
-        />
+        <Header />
+        <EditNote data={note} onChangeNote={this.onChangeNote} />
       </Box>
     );
   }
