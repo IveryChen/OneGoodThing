@@ -62,7 +62,7 @@ class Home extends React.PureComponent {
             gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
             height="100%"
             overflow="auto"
-            pb="16px"
+            pt="4px"
           >
             {map(notes, (note) => (
               <Note

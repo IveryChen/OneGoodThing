@@ -15,41 +15,38 @@ const StyledNote = styled(Box)`
     inset 0 50px 100px -30px rgba(255, 255, 255, 0.3);
 
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px,
-      inset 0 -20px 20px -20px rgba(0, 0, 0, 0.1),
-      inset 0 50px 100px -30px rgba(255, 255, 255, 0.3);
+    transform: rotate(${() => Math.random() * 4 - 2}deg);
   }
 
-&:before {
-  content: "";
-  position: absolute;
-  ${() => {
-    const size = 12 + Math.floor(Math.random() * 12);
-    const corner = Math.floor(Math.random() * 4);
+  &:before {
+    content: "";
+    position: absolute;
+    ${() => {
+      const size = 12 + Math.floor(Math.random() * 12);
+      const corner = Math.floor(Math.random() * 4);
 
-    const positions = [
-      { x: "left", y: "top", angle: -45 }, // top left
-      { x: "right", y: "top", angle: 45 }, // top right
-      { x: "left", y: "bottom", angle: -135 }, // bottom left
-      { x: "right", y: "bottom", angle: 135 }, // bottom right
-    ];
+      const positions = [
+        { x: "left", y: "top", angle: -45 }, // top left
+        { x: "right", y: "top", angle: 45 }, // top right
+        { x: "left", y: "bottom", angle: -135 }, // bottom left
+        { x: "right", y: "bottom", angle: 135 }, // bottom right
+      ];
 
-    const { x, y, angle } = positions[corner];
+      const { x, y, angle } = positions[corner];
 
-    return `
-      ${x}: -1px;
-      ${y}: -1px;
-      width: ${size}px;
-      height: ${size}px;
-      background: linear-gradient(
-        ${angle}deg,
-        transparent 48%,
-        rgba(0,0,0,0.05) 50%
-      );
-    `;
-  }}
-  pointer-events: none;
+      return `
+        ${x}: -1px;
+        ${y}: -1px;
+        width: ${size}px;
+        height: ${size}px;
+        background: linear-gradient(
+          ${angle}deg,
+          transparent 48%,
+          rgba(0,0,0,0.05) 50%
+        );
+      `;
+    }}
+    pointer-events: none;
 
 
   &:after {
