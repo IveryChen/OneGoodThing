@@ -6,13 +6,13 @@ import updateNote from "../../api/updateNote";
 import Box from "../../components/Box";
 import Modal from "../../components/Modal";
 import IconButton from "../../components/IconButton";
-import { stickies, theme } from "../../constants/constants";
-import chooseColor from "../Notes/chooseColour";
+import { theme } from "../../constants/constants";
 
 const StyledInput = styled.textarea`
-  background-color: ${chooseColor()};
+  background-color: ${(props) => props.backgroundColor};
   border-style: none;
   color: black;
+  font-size: 16px;
   font-family: inherit;
   height: 320px;
   padding: 8px;
@@ -92,7 +92,7 @@ export default class NoteModal extends React.PureComponent {
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
           <StyledInput
-            background={stickies.lightyellow}
+            backgroundColor={data.color}
             onChange={this.handleChange}
             readOnly={!edit}
             required={true}
