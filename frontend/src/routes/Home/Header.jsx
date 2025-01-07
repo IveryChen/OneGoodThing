@@ -9,19 +9,17 @@ import Box from "../../components/Box";
 import Text from "../../components/Text";
 
 class Header extends React.PureComponent {
-  openModal = () => {
-    this.props.onChangeIsOpen(true);
-  };
+  openModal = () => this.props.onChangeIsOpen(true);
 
   render() {
     const { user } = this.props;
 
     return (
       <Box
+        alignItems="center"
         display="flex"
-        height={56}
+        height={36}
         justifyContent="space-between"
-        p="12px"
         width="100%"
       >
         <Box
