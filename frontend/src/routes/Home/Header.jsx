@@ -64,6 +64,7 @@ class Header extends React.PureComponent {
               right={0}
               top="100%"
               width={64}
+              zIndex={1}
             >
               <Text color={theme.darkgray} fontSize="12px">
                 Logout
