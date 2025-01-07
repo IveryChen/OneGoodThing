@@ -4,7 +4,7 @@ import Box from "../../components/Box";
 import Header from "../../components/Header";
 import { withRouter } from "../../utils/withRouter";
 
-import EditNote from "./EditModal";
+import EditNote from "./EditNote";
 
 class Home extends React.PureComponent {
   state = { note: "" };
