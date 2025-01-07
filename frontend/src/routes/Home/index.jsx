@@ -4,33 +4,25 @@ import Box from "../../components/Box";
 import Header from "../../components/Header";
 import { withRouter } from "../../utils/withRouter";
 
-import EditNoteModal from "./EditNoteModal";
+import EditNote from "./EditModal";
 
 class Home extends React.PureComponent {
-  state = { isOpen: false, note: "" };
-
-  onChangeIsOpen = (isOpen) => this.setState({ isOpen });
+  state = { note: "" };
 
   onChangeNote = (note) => this.setState({ note });
 
-  onClose = () => this.setState({ isOpen: false });
-
   render() {
-    const { isOpen, note } = this.state;
+    const { note } = this.state;
 
     return (
-      <>
-        <Box display="grid">
-          <Header onChangeIsOpen={this.onChangeIsOpen} />
-        </Box>
-        <EditNoteModal
+      <Box display="grid" gridTemplateRows="auto 1fr">
+        <Header onChangeIsOpen={this.onChangeIsOpen} />
+        <EditNote
           data={note}
-          isOpen={isOpen}
-          onChangeIsOpen={this.onChangeIsOpen}
           onChangeNote={this.onChangeNote}
           onClose={this.onClose}
         />
-      </>
+      </Box>
     );
   }
 }
