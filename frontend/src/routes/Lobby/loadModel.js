@@ -1,5 +1,6 @@
 import { Box3, Vector3 } from "three";
 import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
+
 import { optimizeGeometry } from "./geometryOptimization";
 
 export default function loadModel(url, { glassMaterial, plasticMaterial }) {

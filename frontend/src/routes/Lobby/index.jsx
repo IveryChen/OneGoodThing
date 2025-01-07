@@ -1,9 +1,27 @@
+import styled from "@emotion/styled";
 import React from "react";
+import Measure from "react-measure";
 
+import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
 import { withRouter } from "../../utils/withRouter";
 
+import ThreeJar from "./ThreeJar";
+
+const StyledJar = styled(Box)`
+  height: 640px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    height: auto;
+    width: 90%;
+  }
+`;
+
 class Lobby extends React.PureComponent {
+  ref = React.createRef();
+  threeInstance = null;
+
   onClick = () => {
     const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     const redirectUri = import.meta.env.VITE_REDIRECT_URL;
@@ -14,11 +32,44 @@ class Lobby extends React.PureComponent {
     window.location.href = googleAuthUrl;
   };
 
+  componentDidMount() {
+    const canvas = this.ref.current;
+    this.threeInstance = new ThreeJar(canvas);
+  }
+
+  onResize = ({ bounds: { height, width } }) => {
+    if (this.threeInstance) {
+      this.threeInstance.resize(width, height);
+    }
+  };
+
+  componentWillUnmount() {
+    if (this.threeInstance) {
+      this.threeInstance.destroy();
+    }
+  }
+
   render() {
     return (
-      <IconButton borderStyle="none" label="Sign in" onClick={this.onClick} />
+      <Box>
+        <Measure bounds onResize={this.onResize}>
+          {this.renderBody}
+        </Measure>
+        <IconButton borderStyle="none" label="Sign in" onClick={this.onClick} />
+      </Box>
     );
   }
+
+  renderBody = ({ measureRef }) => (
+    <StyledJar
+      as="canvas"
+      justifySelf="center"
+      ref={(element) => {
+        this.ref.current = element;
+        measureRef(element);
+      }}
+    />
+  );
 }
 
 export default withRouter(Lobby);
