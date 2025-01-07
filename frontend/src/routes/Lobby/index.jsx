@@ -4,6 +4,7 @@ import Measure from "react-measure";
 
 import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
+import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
 import ThreeJar from "./ThreeJar";
@@ -51,11 +52,16 @@ class Lobby extends React.PureComponent {
 
   render() {
     return (
-      <Box>
+      <Box display="grid">
         <Measure bounds onResize={this.onResize}>
           {this.renderBody}
         </Measure>
-        <IconButton borderStyle="none" label="Sign in" onClick={this.onClick} />
+        <IconButton
+          color={theme.darkgray}
+          justifySelf="center"
+          label="Sign in"
+          onClick={this.onClick}
+        />
       </Box>
     );
   }
