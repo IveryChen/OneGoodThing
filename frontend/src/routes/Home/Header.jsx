@@ -65,7 +65,9 @@ class Header extends React.PureComponent {
               top="100%"
               width={64}
             >
-              <Text color={theme.darkgray}>Logout</Text>
+              <Text color={theme.darkgray} fontSize="12px">
+                Logout
+              </Text>
             </Box>
           )}
         </Box>
