@@ -33,8 +33,11 @@ export default class EditNoteModal extends React.PureComponent {
   };
 
   handleSubmit = async () => {
+    const { onChangeNote } = this.props;
     const { color } = this.state;
     const token = localStorage.getItem("token");
+
+    onChangeNote("");
 
     this.setState({ isPending: true });
 
