@@ -4,9 +4,10 @@ import React from "react";
 import { deleteNote } from "../../api/deleteNote";
 import updateNote from "../../api/updateNote";
 import Box from "../../components/Box";
+import ColorPicker from "../../components/ColorPicker";
 import Modal from "../../components/Modal";
 import IconButton from "../../components/IconButton";
-import { theme } from "../../constants/constants";
+import { stickies, theme } from "../../constants/constants";
 
 const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor};
@@ -21,7 +22,12 @@ const StyledInput = styled.textarea`
 `;
 
 export default class NoteModal extends React.PureComponent {
-  state = { edit: false, isPending: false, note: "" };
+  state = {
+    color: this.props.data?.color || stickies.lightyellow,
+    edit: false,
+    isPending: false,
+    note: "",
+  };
 
   componentDidMount() {
     if (this.props.data) {
@@ -34,6 +40,8 @@ export default class NoteModal extends React.PureComponent {
       this.setState({ note: this.props.data.text });
     }
   }
+
+  onChangeColor = (color) => this.setState({ color });
 
   onChangeNote = (note) => this.setState({ note });
 
@@ -49,12 +57,12 @@ export default class NoteModal extends React.PureComponent {
   handleSubmit = async () => {
     const token = localStorage.getItem("token");
     const { data, onNoteUpdated } = this.props;
-    const { note } = this.state;
+    const { color, note } = this.state;
 
     this.setState({ isPending: true });
 
     try {
-      await updateNote(data._id, note, token);
+      await updateNote(data._id, color, note, token);
       onNoteUpdated();
       this.props.onClose();
     } catch (e) {
@@ -82,7 +90,7 @@ export default class NoteModal extends React.PureComponent {
 
   render() {
     const { data, isOpen, onClose } = this.props;
-    const { edit, isPending, note } = this.state;
+    const { color, edit, isPending, note } = this.state;
 
     if (!data) {
       return null;
@@ -92,13 +100,19 @@ export default class NoteModal extends React.PureComponent {
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
           <StyledInput
-            backgroundColor={data.color}
+            backgroundColor={edit ? color : data.color}
             onChange={this.handleChange}
             readOnly={!edit}
             required={true}
             type="text"
             value={note}
           />
+          {edit && (
+            <ColorPicker
+              onChangeColor={this.onChangeColor}
+              selectedColor={color}
+            />
+          )}
           <IconButton
             bg={edit ? theme.darkgray : "transparent"}
             color={edit ? theme.beige : theme.darkgray}
