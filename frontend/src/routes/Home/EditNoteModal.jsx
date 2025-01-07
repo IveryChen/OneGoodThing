@@ -40,6 +40,7 @@ export default class EditNoteModal extends React.PureComponent {
     try {
       await submitNote(this.props.data, color, token);
       this.props.onChangeIsOpen(false);
+      this.props.onNoteUpdated();
     } catch (e) {
       console.error(e);
     } finally {

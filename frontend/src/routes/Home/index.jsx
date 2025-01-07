@@ -7,19 +7,22 @@ import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
-import Header from "../../components/Header";
 
+import Header from "./Header";
 import Note from "./Note";
 import NoteModal from "./NoteModal";
+import EditNoteModal from "./EditNoteModal";
 
 class Home extends React.PureComponent {
-  state = { editId: null, note: "" };
+  state = { editId: null, note: "", open: false };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
+  onChangeIsOpen = (open) => this.setState({ open });
+
   onChangeNote = (note) => this.setState({ note });
 
-  onClose = () => this.setState({ editId: null });
+  onClose = () => this.setState({ editId: null, open: false });
 
   render() {
     const token = localStorage.getItem("token");
@@ -31,7 +34,7 @@ class Home extends React.PureComponent {
     );
   }
   renderBody = ({ data: notes, error, isPending, reload }) => {
-    const { editId, note } = this.state;
+    const { editId, note, open } = this.state;
 
     if (isPending)
       return (
@@ -51,7 +54,7 @@ class Home extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Header />
+          <Header onChangeIsOpen={this.onChangeIsOpen} />
           <Box
             alignContent="start"
             display="grid"
@@ -74,6 +77,14 @@ class Home extends React.PureComponent {
           <NoteModal
             data={notes[editId]}
             isOpen={editId}
+            onClose={this.onClose}
+            onNoteUpdated={reload}
+          />
+          <EditNoteModal
+            data={note}
+            isOpen={open}
+            onChangeIsOpen={this.onChangeIsOpen}
+            onChangeNote={this.onChangeNote}
             onClose={this.onClose}
             onNoteUpdated={reload}
           />

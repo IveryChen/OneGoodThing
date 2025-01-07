@@ -1,16 +1,16 @@
 import { branch } from "baobab-react/higher-order";
 import React from "react";
-import { LiaThLargeSolid } from "react-icons/lia";
+import { LiaPlusSolid } from "react-icons/lia";
 
 import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
-import Box from "../Box";
-import Text from "../Text";
+import Box from "../../components/Box";
+import Text from "../../components/Text";
 
 class Header extends React.PureComponent {
-  openNotes = () => {
-    this.props.navigate("/notes");
+  openModal = () => {
+    this.props.onChangeIsOpen(true);
   };
 
   render() {
@@ -25,13 +25,12 @@ class Header extends React.PureComponent {
         width="100%"
       >
         <Box
-          as={LiaThLargeSolid}
+          as={LiaPlusSolid}
           color={theme.darkgray}
           cursor="pointer"
-          onClick={this.openNotes}
+          onClick={this.openModal}
           size={32}
         />
-
         <Text color={theme.darkgray} textTransform="uppercase">
           {user.name}
         </Text>
