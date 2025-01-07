@@ -15,6 +15,7 @@ const StyledInput = styled.textarea`
   border-style: none;
   color: black;
   font-family: inherit;
+  font-size: 16px;
   height: 320px;
   padding: 8px;
   user-select: text;
