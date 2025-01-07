@@ -6,7 +6,6 @@ import FontLoader from "./components/FontLoader";
 import GoogleCallback from "./components/GoogleCallback";
 import Home from "./routes/Home";
 import Lobby from "./routes/Lobby";
-import Notes from "./routes/Notes";
 
 import "./App.css";
 import state from "./state";
@@ -19,7 +18,6 @@ class App extends React.PureComponent {
           <Routes>
             <Route path="/" element={<Lobby />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/notes" element={<Notes />} />
             <Route path="/auth/google/callback" element={<GoogleCallback />} />
           </Routes>
         </BrowserRouter>

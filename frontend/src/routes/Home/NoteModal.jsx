@@ -12,8 +12,8 @@ const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor};
   border-style: none;
   color: black;
-  font-size: 16px;
   font-family: inherit;
+  font-size: 16px;
   height: 320px;
   padding: 8px;
   user-select: text;

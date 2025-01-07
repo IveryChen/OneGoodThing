@@ -6,7 +6,8 @@ import ColorPicker from "../../components/ColorPicker";
 import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
 import { theme } from "../../constants/constants";
-import chooseColor from "../Notes/chooseColour";
+
+import chooseColor from "./chooseColour";
 
 const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor || chooseColor()};
