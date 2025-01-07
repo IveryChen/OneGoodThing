@@ -12,7 +12,7 @@ class Header extends React.PureComponent {
   state = { isDropdownOpen: false };
 
   handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.href = "/";
   };
 
