@@ -59,7 +59,7 @@ class Home extends React.PureComponent {
             alignContent="start"
             display="grid"
             gap="16px"
-            gridTemplateColumns="repeat(auto-fill, minmax(120px, 1fr))"
+            gridTemplateColumns="repeat(auto-fill, minmax(180px, 1fr))"
             height="100%"
             overflow="auto"
             pt="4px"
