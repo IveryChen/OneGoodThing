@@ -21,13 +21,11 @@ class GoogleCallback extends React.PureComponent {
 
       if (cachedUser && isValid) {
         const user = JSON.parse(cachedUser);
-        console.log(user);
         state.select("user").set(user);
         return user;
       }
 
       // If we get here, either there's no cached data or the token is invalid
-      // Clear any stale data
       this.clearAuth();
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -37,7 +35,6 @@ class GoogleCallback extends React.PureComponent {
         throw new Error("No authorization code found");
       }
 
-      // Make the authentication request
       const response = await fetch(
         `${API_URL}/auth/google/callback?code=${code}`,
         {
@@ -49,8 +46,7 @@ class GoogleCallback extends React.PureComponent {
       );
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Failed to authenticate");
+        throw new Error("Failed to authenticate");
       }
 
       const data = await response.json();
@@ -71,10 +67,16 @@ class GoogleCallback extends React.PureComponent {
     return (
       <Async promiseFn={this.loadUser}>
         {({ data, error, isPending }) => {
-          if (isPending) return <div>Loading...</div>;
-          if (error) return <div>Error: {error.message}</div>;
-          if (data) return <Navigate to="/home" />;
-          return null;
+          if (isPending) {
+            return <div>Loading...</div>;
+          }
+          if (error) {
+            return <div>Error: {error.message}</div>;
+          }
+          if (data) {
+            return <Navigate to="/home" replace />;
+          }
+          return <div>Something went wrong...</div>;
         }}
       </Async>
     );
