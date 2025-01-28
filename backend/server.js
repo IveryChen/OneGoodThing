@@ -40,9 +40,24 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
+const usedCodes = new Set();
+
 app.get("/auth/google/callback", async (req, res) => {
   try {
     const { code } = req.query;
+
+    if (!code) {
+      throw new Error("Authorization code is missing");
+    }
+
+    if (usedCodes.has(code)) {
+      return res.status(400).json({
+        error: "Authorization code has already been used",
+      });
+    }
+
+    usedCodes.add(code);
+    setTimeout(() => usedCodes.delete(code), 5 * 60 * 1000);
 
     const tokenResponse = await axios.post(
       "https://oauth2.googleapis.com/token",
@@ -72,7 +87,6 @@ app.get("/auth/google/callback", async (req, res) => {
       });
     }
 
-    // Create JWT token
     const token = jwt.sign(
       { email: user.email, id: user._id },
       process.env.JWT_SECRET,
