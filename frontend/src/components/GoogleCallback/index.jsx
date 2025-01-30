@@ -8,6 +8,12 @@ import isTokenValid from "../../utils/isTokenValid";
 import { withRouter } from "../../utils/withRouter";
 
 class GoogleCallback extends React.PureComponent {
+  controller = new AbortController();
+
+  componentWillUnmount() {
+    this.controller.abort();
+  }
+
   clearAuth = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -25,7 +31,6 @@ class GoogleCallback extends React.PureComponent {
         return user;
       }
 
-      // If we get here, either there's no cached data or the token is invalid
       this.clearAuth();
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -42,14 +47,24 @@ class GoogleCallback extends React.PureComponent {
           headers: {
             "Content-Type": "application/json",
           },
+          signal: this.controller.signal,
         }
       );
 
+      const data = await response.json();
+
+      // If the code was already used but we have a user in localStorage,
+      // it means the first request succeeded, so we can just return that user
       if (!response.ok) {
-        throw new Error("Failed to authenticate");
+        if (data.error === "Authorization code has already been used") {
+          const cachedUser = localStorage.getItem("user");
+          if (cachedUser) {
+            return JSON.parse(cachedUser);
+          }
+        }
+        throw new Error(data.error || "Authentication failed");
       }
 
-      const data = await response.json();
       const { user, token } = data;
 
       localStorage.setItem("user", JSON.stringify(user));
@@ -58,6 +73,9 @@ class GoogleCallback extends React.PureComponent {
 
       return user;
     } catch (error) {
+      if (error.name === "AbortError") {
+        return; // Ignore abort errors
+      }
       this.clearAuth();
       throw error;
     }
