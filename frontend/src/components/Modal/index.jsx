@@ -4,7 +4,8 @@ import React from "react";
 import Box from "../../components/Box";
 
 const StyledBox = styled(Box)`
-  backdrop-filter: blur(4px);
+  // backdrop-filter: blur(4px);
+  background-color: #ede8e8;
 `;
 
 export default class Modal extends React.PureComponent {
