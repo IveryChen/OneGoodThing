@@ -67,7 +67,7 @@ export default class Note extends React.PureComponent {
   onClick = () => this.props.onChangeEditId(this.props.data._id);
 
   render() {
-    const { data } = this.props;
+    const { data, showContent } = this.props;
     const readable = readableColor(data.color);
 
     return (
@@ -80,12 +80,16 @@ export default class Note extends React.PureComponent {
         onClick={this.onClick}
         p={12}
       >
-        <Text color={readable} fontSize={12} justifySelf="start">
-          {new Date(data.createdAt).toLocaleDateString()}
-        </Text>
-        <Text color={readable} overflowX="hidden">
-          {data.text}
-        </Text>
+        {showContent && (
+          <>
+            <Text color={readable} fontSize={12} justifySelf="start" truncate>
+              {new Date(data.createdAt).toLocaleDateString()}
+            </Text>
+            <Text color={readable} overflowX="hidden" truncate>
+              {data.text}
+            </Text>
+          </>
+        )}
       </StyledNote>
     );
   }
