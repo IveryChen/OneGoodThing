@@ -8,6 +8,7 @@ import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 import { withRouter } from "../../utils/withRouter";
 
+import Footer from "./Footer";
 import Header from "./Header";
 import Note from "./Note";
 import NoteModal from "./NoteModal";
@@ -47,14 +48,13 @@ class Home extends React.PureComponent {
       return (
         <Box
           display="grid"
-          gridTemplateRows="auto 1fr"
-          gap="12px"
+          gridTemplateRows="auto 1fr auto"
           height="100%"
           overflow="hidden"
           p="12px"
           pb={0}
         >
-          <Header onChangeIsOpen={this.onChangeIsOpen} />
+          <Header mb="12px" onChangeIsOpen={this.onChangeIsOpen} />
           <Box
             alignContent="start"
             display="grid"
@@ -74,6 +74,7 @@ class Home extends React.PureComponent {
               />
             ))}
           </Box>
+          <Footer />
           <NoteModal
             data={notes[editId]}
             isOpen={editId}

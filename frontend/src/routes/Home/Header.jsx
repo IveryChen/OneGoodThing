@@ -25,7 +25,7 @@ class Header extends React.PureComponent {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, ...restProps } = this.props;
     const { isDropdownOpen } = this.state;
 
     return (
@@ -35,6 +35,7 @@ class Header extends React.PureComponent {
         height={36}
         justifyContent="space-between"
         width="100%"
+        {...restProps}
       >
         <Box
           as={LiaPlusSolid}
