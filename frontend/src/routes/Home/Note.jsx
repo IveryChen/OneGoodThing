@@ -22,7 +22,6 @@ const ContentBox = styled(Box)`
   padding: 10% 10%;
   position: relative;
   width: 100%;
-  z-index: 1;
 `;
 
 export default class Note extends React.PureComponent {
