@@ -61,7 +61,7 @@ class Home extends React.PureComponent {
           <Box
             alignContent="start"
             display="grid"
-            gap="16px"
+            gap="8px"
             gridTemplateColumns={`repeat(${row}, 1fr)`}
             height="100%"
             overflow="auto"
