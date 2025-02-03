@@ -8,13 +8,8 @@ import Tab from "./Tab";
 const values = [1, 2, 5, 10];
 
 export default class Footer extends React.PureComponent {
-  state = { row: 10 };
-
-  onChangeRow = (row) => this.setState({ row });
-
   render() {
-    const { ...restProps } = this.props;
-    const { row } = this.state;
+    const { onChangeRow, row, ...restProps } = this.props;
 
     return (
       <Box
@@ -22,14 +17,15 @@ export default class Footer extends React.PureComponent {
         display="flex"
         gap="4px"
         justifyContent="center"
-        p="16px"
+        mb="8px"
+        mt="8px"
         {...restProps}
       >
         {map(values, (value) => (
           <Tab
             isSelected={row === value}
             key={value}
-            onChangeRow={this.onChangeRow}
+            onChangeRow={onChangeRow}
             value={value}
           />
         ))}

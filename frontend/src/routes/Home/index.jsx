@@ -15,13 +15,15 @@ import NoteModal from "./NoteModal";
 import EditNoteModal from "./EditNoteModal";
 
 class Home extends React.PureComponent {
-  state = { editId: null, note: "", open: false };
+  state = { editId: null, note: "", open: false, row: 10 };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
   onChangeIsOpen = (open) => this.setState({ open });
 
   onChangeNote = (note) => this.setState({ note });
+
+  onChangeRow = (row) => this.setState({ row });
 
   onClose = () => this.setState({ editId: null, open: false });
 
@@ -35,7 +37,7 @@ class Home extends React.PureComponent {
     );
   }
   renderBody = ({ data: notes, error, isPending, reload }) => {
-    const { editId, note, open } = this.state;
+    const { editId, note, open, row } = this.state;
 
     if (isPending)
       return (
@@ -74,7 +76,7 @@ class Home extends React.PureComponent {
               />
             ))}
           </Box>
-          <Footer />
+          <Footer onChangeRow={this.onChangeRow} row={row} />
           <NoteModal
             data={notes[editId]}
             isOpen={editId}
