@@ -82,10 +82,10 @@ export default class Note extends React.PureComponent {
       >
         {showContent && (
           <>
-            <Text color={readable} fontSize={12} justifySelf="start" truncate>
+            <Text color={readable} fontSize={12} justifySelf="start">
               {new Date(data.createdAt).toLocaleDateString()}
             </Text>
-            <Text color={readable} overflowX="hidden" truncate>
+            <Text color={readable} overflowX="hidden">
               {data.text}
             </Text>
           </>

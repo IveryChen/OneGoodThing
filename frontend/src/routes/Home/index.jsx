@@ -36,6 +36,7 @@ class Home extends React.PureComponent {
       </Async>
     );
   }
+
   renderBody = ({ data: notes, error, isPending, reload }) => {
     const { editId, note, open, row } = this.state;
 
@@ -64,7 +65,7 @@ class Home extends React.PureComponent {
             gridTemplateColumns={`repeat(${row}, 1fr)`}
             height="100%"
             overflow="auto"
-            pt="4px"
+            overflowX="hidden"
           >
             {map(notes, (note) => (
               <Note
