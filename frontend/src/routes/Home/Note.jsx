@@ -8,11 +8,11 @@ export default class Note extends React.PureComponent {
   onClick = () => this.props.onChangeEditId(this.props.data._id);
 
   render() {
-    const { data, showContent } = this.props;
+    const { data, row, showContent } = this.props;
     const readable = readableColor(data.color);
     const color = data.color.replace("#", "");
+    const r = row === 5 ? 2 : row;
 
-    console.log(data.color);
     return (
       <Box position="relative" aspectRatio={1} onClick={this.onClick}>
         <Box
@@ -21,7 +21,7 @@ export default class Note extends React.PureComponent {
           height="100%"
           left={0}
           position="absolute"
-          src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${color}.png`}
+          src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${color}_${r}.png`}
           top={0}
           width="100%"
         />

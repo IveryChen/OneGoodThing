@@ -74,6 +74,7 @@ class Home extends React.PureComponent {
                 key={note._id}
                 onChangeEditId={this.onChangeEditId}
                 onNoteUpdated={reload}
+                row={row}
                 showContent={row < 5}
               />
             ))}
