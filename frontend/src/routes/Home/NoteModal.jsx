@@ -98,7 +98,16 @@ export default class NoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box display="grid" gap="8px">
+        <Box display="grid" gap="8px" position="relative">
+          <Box
+            alt="Note background"
+            as="img"
+            left={0}
+            position="absolute"
+            src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
+            top={0}
+            width="100%"
+          />
           <StyledInput
             backgroundColor={edit ? color : data.color}
             onChange={this.handleChange}
