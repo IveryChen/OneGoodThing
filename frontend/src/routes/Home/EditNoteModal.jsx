@@ -70,6 +70,7 @@ export default class EditNoteModal extends React.PureComponent {
               alt="Note background"
               as="img"
               left={0}
+              pointerEvents="none"
               position="absolute"
               src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
               top={0}
