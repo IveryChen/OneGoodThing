@@ -12,16 +12,19 @@ export default class Note extends React.PureComponent {
     const { data, row, showContent } = this.props;
     const readable = readableColor(data.color);
     const color = data.color.replace("#", "");
-    const r = row === 5 ? 2 : row;
+    const image = `${
+      row === 1 || row === 2 ? "edit" : `${color}_${row === 5 ? 10 : row}`
+    }`;
 
     return (
       <Box aspectRatio={1} onClick={this.onClick} position="relative">
         <Box
           alt="Note background"
           as="img"
+          bg={row === 1 || row === 2 ? data.color : "transparent"}
           left={0}
           position="absolute"
-          src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${color}_${r}.png`}
+          src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}.png`}
           top={0}
           width="100%"
         />
@@ -29,7 +32,7 @@ export default class Note extends React.PureComponent {
           display="grid"
           gridTemplateRows="auto 1fr"
           height="100%"
-          p={(1 / row) * 4}
+          p="12px"
           position="relative"
         >
           {showContent && (
