@@ -18,7 +18,6 @@ export default class Note extends React.PureComponent {
         <Box
           alt="Note background"
           as="img"
-          height="100%"
           left={0}
           position="absolute"
           src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${color}_${r}.png`}
@@ -28,7 +27,8 @@ export default class Note extends React.PureComponent {
         <Box
           display="grid"
           gridTemplateRows="auto 1fr"
-          p={12}
+          height="100%"
+          p="32px"
           position="relative"
         >
           {showContent && (
