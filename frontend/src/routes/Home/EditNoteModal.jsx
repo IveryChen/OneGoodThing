@@ -42,7 +42,7 @@ export default class EditNoteModal extends React.PureComponent {
     this.setState({ isPending: true });
 
     try {
-      await submitNote(this.props.data, color, token);
+      await submitNote(this.props.note, color, token);
       this.props.onChangeIsOpen(false);
       this.props.onNoteUpdated();
     } catch (e) {
@@ -55,7 +55,7 @@ export default class EditNoteModal extends React.PureComponent {
   onChangeColor = (color) => this.setState({ color });
 
   render() {
-    const { data, isOpen, onClose } = this.props;
+    const { data, isOpen, onClose, note } = this.props;
     const { color, isPending } = this.state;
 
     return (
@@ -75,7 +75,7 @@ export default class EditNoteModal extends React.PureComponent {
             onChange={this.handleChange}
             required={true}
             type="text"
-            value={data}
+            value={note}
           />
           <ColorPicker
             onChangeColor={this.onChangeColor}

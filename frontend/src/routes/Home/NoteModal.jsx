@@ -7,7 +7,9 @@ import Box from "../../components/Box";
 import ColorPicker from "../../components/ColorPicker";
 import Modal from "../../components/Modal";
 import IconButton from "../../components/IconButton";
+import Text from "../../components/Text";
 import { stickies, theme } from "../../constants/constants";
+import format from "../../utils/format";
 
 const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor};
@@ -98,15 +100,25 @@ export default class NoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <IconButton
-          borderWidth={0}
-          color={edit ? theme.lightbrown : theme.darkbrown}
-          disabled={isPending}
-          justifyItems="center"
-          justifySelf="end"
-          label={edit ? "SAVE" : "EDIT"}
-          onClick={edit ? this.handleSubmit : this.toggleEdit}
-        />
+        <Box
+          alignItems="center"
+          display="flex"
+          gap="8px"
+          justifyContent="space-between"
+        >
+          <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
+            {format(data.createdAt)}
+          </Text>
+          <IconButton
+            borderWidth={0}
+            color={edit ? theme.lightbrown : theme.darkbrown}
+            disabled={isPending}
+            justifyItems="center"
+            justifySelf="end"
+            label={edit ? "SAVE" : "EDIT"}
+            onClick={edit ? this.handleSubmit : this.toggleEdit}
+          />
+        </Box>
         <Box display="grid" position="relative">
           <Box
             alt="Note background"

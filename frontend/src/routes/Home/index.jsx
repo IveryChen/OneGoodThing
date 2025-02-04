@@ -87,8 +87,9 @@ class Home extends React.PureComponent {
             onNoteUpdated={reload}
           />
           <EditNoteModal
-            data={note}
+            data={notes[editId]}
             isOpen={open}
+            note={note}
             onChangeIsOpen={this.onChangeIsOpen}
             onChangeNote={this.onChangeNote}
             onClose={this.onClose}

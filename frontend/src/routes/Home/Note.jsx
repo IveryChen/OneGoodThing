@@ -3,6 +3,7 @@ import { readableColor } from "polished";
 
 import Box from "../../components/Box";
 import Text from "../../components/Text";
+import format from "../../utils/format";
 
 export default class Note extends React.PureComponent {
   onClick = () => this.props.onChangeEditId(this.props.data._id);
@@ -34,7 +35,7 @@ export default class Note extends React.PureComponent {
           {showContent && (
             <>
               <Text color={readable} fontSize={12} justifySelf="start">
-                {new Date(data.createdAt).toLocaleDateString()}
+                {format(data.createdAt)}
               </Text>
               <Text color={readable} overflowX="hidden">
                 {data.text}
