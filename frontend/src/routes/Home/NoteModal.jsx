@@ -100,58 +100,61 @@ export default class NoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box
-          alignItems="center"
-          display="flex"
-          gap="8px"
-          justifyContent="space-between"
-        >
-          <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
-            {format(data.createdAt)}
-          </Text>
-          <IconButton
-            borderWidth={0}
-            color={edit ? theme.lightbrown : theme.darkbrown}
-            disabled={isPending}
-            justifyItems="center"
-            justifySelf="end"
-            label={edit ? "SAVE" : "EDIT"}
-            onClick={edit ? this.handleSubmit : this.toggleEdit}
-          />
-        </Box>
-        <Box display="grid" position="relative">
+        <Box display="grid" gap="8px">
           <Box
-            alt="Note background"
-            as="img"
-            left={0}
-            position="absolute"
-            src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
-            top={0}
-            width="100%"
-          />
-          <StyledInput
-            backgroundColor={edit ? color : data.color}
-            onChange={this.handleChange}
-            readOnly={!edit}
-            required={true}
-            type="text"
-            value={note}
-          />
+            alignItems="center"
+            display="flex"
+            gap="8px"
+            justifyContent="space-between"
+          >
+            <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
+              {format(data.createdAt)}
+            </Text>
+            <IconButton
+              borderWidth={0}
+              color={edit ? theme.lightbrown : theme.darkbrown}
+              disabled={isPending}
+              justifyItems="center"
+              justifySelf="end"
+              label={edit ? "SAVE" : "EDIT"}
+              onClick={edit ? this.handleSubmit : this.toggleEdit}
+            />
+          </Box>
           {edit && (
             <ColorPicker
               onChangeColor={this.onChangeColor}
               selectedColor={color}
             />
           )}
-          <IconButton
-            borderWidth={0}
-            color={theme.darkgray}
-            disabled={isPending}
-            justifyItems="center"
-            justifySelf="end"
-            label="DELETE"
-            onClick={this.handleDelete}
-          />
+          <Box position="relative">
+            <Box
+              alt="Note background"
+              as="img"
+              left={0}
+              position="absolute"
+              src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
+              top={0}
+              width="100%"
+            />
+            <StyledInput
+              backgroundColor={edit ? color : data.color}
+              onChange={this.handleChange}
+              readOnly={!edit}
+              required={true}
+              type="text"
+              value={note}
+            />
+
+            <IconButton
+              borderWidth={0}
+              color={theme.darkgray}
+              disabled={isPending}
+              justifyItems="center"
+              justifySelf="end"
+              label="DELETE"
+              onClick={this.handleDelete}
+            />
+          </Box>
         </Box>
       </Modal>
     );

@@ -55,39 +55,42 @@ export default class EditNoteModal extends React.PureComponent {
   onChangeColor = (color) => this.setState({ color });
 
   render() {
-    const { data, isOpen, onClose, note } = this.props;
+    const { isOpen, onClose, note } = this.props;
     const { color, isPending } = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box display="grid" gap="8px" position="relative">
-          <Box
-            alt="Note background"
-            as="img"
-            left={0}
-            position="absolute"
-            src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
-            top={0}
-            width="100%"
-          />
-          <StyledInput
-            backgroundColor={color}
-            onChange={this.handleChange}
-            required={true}
-            type="text"
-            value={note}
-          />
+        <Box display="grid" gap="8px" p="8px">
           <ColorPicker
             onChangeColor={this.onChangeColor}
             selectedColor={color}
           />
-          <IconButton
-            color={theme.darkgray}
-            disabled={isPending}
-            justifyItems="center"
-            label="SUBMIT"
-            onClick={this.handleSubmit}
-          />
+          <Box position="relative">
+            <Box
+              alt="Note background"
+              as="img"
+              left={0}
+              position="absolute"
+              src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
+              top={0}
+              width="100%"
+            />
+            <StyledInput
+              backgroundColor={color}
+              onChange={this.handleChange}
+              required={true}
+              type="text"
+              value={note}
+            />
+            <IconButton
+              borderWidth={0}
+              color={theme.darkbrown}
+              disabled={isPending}
+              justifyItems="center"
+              label="SUBMIT"
+              onClick={this.handleSubmit}
+            />
+          </Box>
         </Box>
       </Modal>
     );
