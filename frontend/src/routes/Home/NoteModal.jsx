@@ -98,7 +98,16 @@ export default class NoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box display="grid" gap="8px" position="relative">
+        <IconButton
+          borderWidth={0}
+          color={edit ? theme.lightbrown : theme.darkbrown}
+          disabled={isPending}
+          justifyItems="center"
+          justifySelf="end"
+          label={edit ? "SAVE" : "EDIT"}
+          onClick={edit ? this.handleSubmit : this.toggleEdit}
+        />
+        <Box display="grid" position="relative">
           <Box
             alt="Note background"
             as="img"
@@ -123,17 +132,11 @@ export default class NoteModal extends React.PureComponent {
             />
           )}
           <IconButton
-            bg={edit ? theme.darkgray : "transparent"}
-            color={edit ? theme.beige : theme.darkgray}
-            disabled={isPending}
-            justifyItems="center"
-            label={edit ? "SAVE" : "EDIT"}
-            onClick={edit ? this.handleSubmit : this.toggleEdit}
-          />
-          <IconButton
+            borderWidth={0}
             color={theme.darkgray}
             disabled={isPending}
             justifyItems="center"
+            justifySelf="end"
             label="DELETE"
             onClick={this.handleDelete}
           />
