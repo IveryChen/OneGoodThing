@@ -3,6 +3,5 @@ export default function format(date) {
     month: "2-digit",
     day: "2-digit",
     year: "numeric",
-    timeZone: "UTC",
   }).format(new Date(date));
 }
