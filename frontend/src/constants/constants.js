@@ -24,16 +24,17 @@ export const stickies = {
 };
 
 export const stickiesColours = [
-  "#FEFF9C",
-  "#FFF740",
-  "#7AFCFF",
-  "#FF7EB9",
-  "#FFB0D1",
-  "#ABBFFB",
   "#2FAFC9",
-  "#D4AEFF",
   "#6947A8",
-  "#FFBF9F",
-  "#FF959B",
+  "#ABBFFB",
+  "#B9EEFF",
+  "#D4AEFF",
   "#D5FFB0",
+  "#FF959B",
+  "#FFB0D1",
+  "#FFBF9F",
+  "#FFCED7",
+  "#FFD042",
+  "#FFF740",
+  "#FFF7B0",
 ];
