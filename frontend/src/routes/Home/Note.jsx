@@ -14,7 +14,7 @@ export default class Note extends React.PureComponent {
     const r = row === 5 ? 2 : row;
 
     return (
-      <Box position="relative" aspectRatio={1} onClick={this.onClick}>
+      <Box aspectRatio={1} onClick={this.onClick} position="relative">
         <Box
           alt="Note background"
           as="img"
@@ -28,7 +28,7 @@ export default class Note extends React.PureComponent {
           display="grid"
           gridTemplateRows="auto 1fr"
           height="100%"
-          p="32px"
+          p={(1 / row) * 4}
           position="relative"
         >
           {showContent && (
