@@ -1,4 +1,4 @@
-import { keyBy } from "lodash";
+import { each, keyBy } from "lodash";
 
 import { API_URL } from "../constants/config";
 
@@ -15,6 +15,12 @@ export async function fetchNotes(props) {
   }
 
   const data = await response.json();
+  const dateMap = {};
 
-  return keyBy(data, "_id");
+  each(data, (note) => {
+    const date = new Date(note.createdAt).toDateString();
+    dateMap[date] = note._id;
+  });
+
+  return { dateMap, notes: keyBy(data, "_id") };
 }

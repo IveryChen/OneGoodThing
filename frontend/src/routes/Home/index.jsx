@@ -6,6 +6,7 @@ import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
+import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
 import Footer from "./Footer";
@@ -37,7 +38,12 @@ class Home extends React.PureComponent {
     );
   }
 
-  renderBody = ({ data: notes, error, isPending, reload }) => {
+  renderBody = ({ data, error, isPending, reload }) => {
+    if (!data) {
+      return null;
+    }
+
+    const { dateMap, notes } = data;
     const { editId, note, open, row } = this.state;
 
     if (isPending)
@@ -48,6 +54,10 @@ class Home extends React.PureComponent {
       );
     if (error) return <Text p="12px">Error: {error.message}</Text>;
     if (notes) {
+      const allDays = getDaysInYear();
+      console.log(allDays);
+      console.log(dateMap);
+
       return (
         <Box
           display="grid"
@@ -67,17 +77,35 @@ class Home extends React.PureComponent {
             overflow="auto"
             overflowX="hidden"
           >
-            {map(notes, (note) => (
-              <Note
-                data={note}
-                editId={editId}
-                key={note._id}
-                onChangeEditId={this.onChangeEditId}
-                onNoteUpdated={reload}
-                row={row}
-                showContent={row < 5}
-              />
-            ))}
+            {map(allDays, (day) => {
+              const noteId = dateMap[day.toDateString()];
+
+              if (noteId) {
+                return (
+                  <Note
+                    data={notes[noteId]}
+                    editId={editId}
+                    key={noteId}
+                    onChangeEditId={this.onChangeEditId}
+                    onNoteUpdated={reload}
+                    row={row}
+                    showContent={row < 5}
+                  />
+                );
+              }
+
+              return (
+                <Box display="grid" key={day.toDateString()} size={36}>
+                  <Box
+                    alignSelf="center"
+                    bg={theme.lightgray}
+                    borderRadius="50%"
+                    justifySelf="center"
+                    size={4}
+                  />
+                </Box>
+              );
+            })}
           </Box>
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <NoteModal
