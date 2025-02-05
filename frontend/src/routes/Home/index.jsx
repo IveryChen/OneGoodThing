@@ -38,6 +38,51 @@ class Home extends React.PureComponent {
     );
   }
 
+  renderGridItems = (notes, dateMap, row, editId, reload) => {
+    if (row === 10) {
+      const allDays = getDaysInYear();
+      return map(allDays, (day) => {
+        const noteId = dateMap[day.toDateString()];
+        if (!noteId) {
+          return (
+            <Box display="grid" key={day.toDateString()} size={36}>
+              <Box
+                alignSelf="center"
+                bg={theme.lightgray}
+                borderRadius="50%"
+                justifySelf="center"
+                size={4}
+              />
+            </Box>
+          );
+        }
+        return (
+          <Note
+            data={notes[noteId]}
+            editId={editId}
+            key={noteId}
+            onChangeEditId={this.onChangeEditId}
+            onNoteUpdated={reload}
+            row={row}
+            showContent={false}
+          />
+        );
+      });
+    }
+
+    return map(notes, (note) => (
+      <Note
+        data={note}
+        editId={editId}
+        key={note._id}
+        onChangeEditId={this.onChangeEditId}
+        onNoteUpdated={reload}
+        row={row}
+        showContent={row < 5}
+      />
+    ));
+  };
+
   renderBody = ({ data, error, isPending, reload }) => {
     if (!data) {
       return null;
@@ -77,35 +122,7 @@ class Home extends React.PureComponent {
             overflow="auto"
             overflowX="hidden"
           >
-            {map(allDays, (day) => {
-              const noteId = dateMap[day.toDateString()];
-
-              if (noteId) {
-                return (
-                  <Note
-                    data={notes[noteId]}
-                    editId={editId}
-                    key={noteId}
-                    onChangeEditId={this.onChangeEditId}
-                    onNoteUpdated={reload}
-                    row={row}
-                    showContent={row < 5}
-                  />
-                );
-              }
-
-              return (
-                <Box display="grid" key={day.toDateString()} size={36}>
-                  <Box
-                    alignSelf="center"
-                    bg={theme.lightgray}
-                    borderRadius="50%"
-                    justifySelf="center"
-                    size={4}
-                  />
-                </Box>
-              );
-            })}
+            {this.renderGridItems(notes, dateMap, row, editId, reload)}
           </Box>
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <NoteModal
