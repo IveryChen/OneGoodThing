@@ -5,6 +5,7 @@ import { Async } from "react-async";
 import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
+import Tip from "../../components/Tip";
 import { theme } from "../../constants/constants";
 import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
@@ -41,45 +42,56 @@ class Home extends React.PureComponent {
   renderGridItems = (notes, dateMap, row, editId, reload) => {
     if (row === 10) {
       const allDays = getDaysInYear();
+
       return map(allDays, (day) => {
         const noteId = dateMap[day.toDateString()];
+
         if (!noteId) {
           return (
-            <Box display="grid" key={day.toDateString()} size={36}>
-              <Box
-                alignSelf="center"
-                bg={theme.lightgray}
-                borderRadius="50%"
-                justifySelf="center"
-                size={4}
-              />
-            </Box>
+            <Tip title={day.toDateString()}>
+              <Box display="grid" key={day.toDateString()} size={36}>
+                <Box
+                  alignSelf="center"
+                  bg={theme.lightgray}
+                  borderRadius="50%"
+                  justifySelf="center"
+                  size={4}
+                />
+              </Box>
+            </Tip>
           );
         }
+
+        const note = notes[noteId];
+
         return (
-          <Note
-            data={notes[noteId]}
-            editId={editId}
-            key={noteId}
-            onChangeEditId={this.onChangeEditId}
-            onNoteUpdated={reload}
-            row={row}
-            showContent={false}
-          />
+          <Tip title={new Date(note.createdAt).toDateString()}>
+            <Note
+              data={note}
+              editId={editId}
+              key={noteId}
+              onChangeEditId={this.onChangeEditId}
+              onNoteUpdated={reload}
+              row={row}
+              showContent={false}
+            />
+          </Tip>
         );
       });
     }
 
     return map(notes, (note) => (
-      <Note
-        data={note}
-        editId={editId}
-        key={note._id}
-        onChangeEditId={this.onChangeEditId}
-        onNoteUpdated={reload}
-        row={row}
-        showContent={row < 5}
-      />
+      <Tip title={new Date(note.createdAt).toDateString()}>
+        <Note
+          data={note}
+          editId={editId}
+          key={note._id}
+          onChangeEditId={this.onChangeEditId}
+          onNoteUpdated={reload}
+          row={row}
+          showContent={row < 5}
+        />
+      </Tip>
     ));
   };
 
