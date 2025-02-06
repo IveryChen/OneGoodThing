@@ -8,11 +8,11 @@ import { theme } from "../../constants/constants";
 import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
-import EditNoteModal from "./EditNoteModal";
+import AddNoteModal from "./AddNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
-import NoteModal from "./NoteModal";
+import EditNoteModal from "./NoteModal";
 
 class Home extends React.PureComponent {
   state = { editId: null, note: "", open: false, row: 10 };
@@ -75,14 +75,13 @@ class Home extends React.PureComponent {
             onChangeEditId={this.onChangeEditId}
           />
           <Footer onChangeRow={this.onChangeRow} row={row} />
-          <NoteModal
+          <EditNoteModal
             data={notes[editId]}
             isOpen={editId}
             onClose={this.onClose}
             onNoteUpdated={reload}
           />
-          <EditNoteModal
-            data={notes[editId]}
+          <AddNoteModal
             isOpen={open}
             note={note}
             onChangeIsOpen={this.onChangeIsOpen}
