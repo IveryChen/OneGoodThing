@@ -10,11 +10,12 @@ import { theme } from "../../constants/constants";
 import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
+import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
+import MeasureGrid from "./MeasureGrid";
 import Note from "./Note";
 import NoteModal from "./NoteModal";
-import EditNoteModal from "./EditNoteModal";
 
 class Home extends React.PureComponent {
   state = { editId: null, note: "", open: false, row: 10 };
@@ -66,15 +67,17 @@ class Home extends React.PureComponent {
 
         return (
           <Tip title={new Date(note.createdAt).toDateString()}>
-            <Note
-              data={note}
-              editId={editId}
-              key={noteId}
-              onChangeEditId={this.onChangeEditId}
-              onNoteUpdated={reload}
-              row={row}
-              showContent={false}
-            />
+            <Box size={36}>
+              <Note
+                data={note}
+                editId={editId}
+                key={noteId}
+                onChangeEditId={this.onChangeEditId}
+                onNoteUpdated={reload}
+                row={row}
+                showContent={false}
+              />
+            </Box>
           </Tip>
         );
       });
@@ -112,8 +115,6 @@ class Home extends React.PureComponent {
     if (error) return <Text p="12px">Error: {error.message}</Text>;
     if (notes) {
       const allDays = getDaysInYear();
-      console.log(allDays);
-      console.log(dateMap);
 
       return (
         <Box
@@ -125,17 +126,15 @@ class Home extends React.PureComponent {
           pb={0}
         >
           <Header mb="12px" onChangeIsOpen={this.onChangeIsOpen} />
-          <Box
-            alignContent="start"
-            display="grid"
-            gap={row === 10 ? 24 / row : 12}
-            gridTemplateColumns={`repeat(${row}, 1fr)`}
-            height="100%"
-            overflow="auto"
-            overflowX="hidden"
-          >
-            {this.renderGridItems(notes, dateMap, row, editId, reload)}
-          </Box>
+          <MeasureGrid
+            notes={notes}
+            dateMap={dateMap}
+            row={row}
+            editId={editId}
+            reload={reload}
+            allDays={allDays}
+            onChangeEditId={this.onChangeEditId}
+          />
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <NoteModal
             data={notes[editId]}
