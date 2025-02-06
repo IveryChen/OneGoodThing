@@ -1,6 +1,7 @@
 import { each, keyBy } from "lodash";
 
 import { API_URL } from "../constants/config";
+import formatDateString from "../utils/formatDateString";
 
 export async function fetchNotes(props) {
   const { token } = props;
@@ -18,7 +19,8 @@ export async function fetchNotes(props) {
   const dateMap = {};
 
   each(data, (note) => {
-    const date = new Date(note.createdAt).toDateString();
+    const date = formatDateString(note.createdAt);
+
     dateMap[date] = note._id;
   });
 

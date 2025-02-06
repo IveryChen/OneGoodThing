@@ -19,7 +19,7 @@ const positions = {
 
 class Tip extends React.PureComponent {
   render() {
-    const { children, position = "center", title, ...restProps } = this.props;
+    const { children, position = "bottom", title, ...restProps } = this.props;
 
     return (
       <TooltipContainer

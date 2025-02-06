@@ -5,6 +5,7 @@ import { map } from "lodash";
 import Box from "../../components/Box";
 import Tip from "../../components/Tip";
 import { theme } from "../../constants/constants";
+import formatDateString from "../../utils/formatDateString";
 
 import Note from "./Note";
 
@@ -20,7 +21,8 @@ class MeasuredGrid extends React.PureComponent {
     const gridSize = Math.floor((width - 24) / row);
 
     return map(allDays, (day) => {
-      const noteId = dateMap[day.toDateString()];
+      const date = formatDateString(day);
+      const noteId = dateMap[date];
 
       if (!noteId) {
         if (row < 5) {
@@ -28,8 +30,8 @@ class MeasuredGrid extends React.PureComponent {
         }
 
         return (
-          <Tip title={day.toDateString()}>
-            <Box display="grid" key={day.toDateString()} size={gridSize}>
+          <Tip title={date}>
+            <Box display="grid" key={date} size={gridSize}>
               <Box
                 alignSelf="center"
                 bg={theme.lightgray}
@@ -45,7 +47,7 @@ class MeasuredGrid extends React.PureComponent {
       const note = notes[noteId];
 
       return (
-        <Tip title={new Date(note.createdAt).toDateString()}>
+        <Tip title={formatDateString(note.createdAt)}>
           <Box height={gridSize} width={gridSize}>
             <Note
               data={note}

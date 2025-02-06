@@ -13,6 +13,7 @@ export default class Tab extends React.PureComponent {
         bg={isSelected ? "#CFCDDC" : "transparent"}
         borderRadius="16px"
         color="black"
+        cursor="pointer"
         fontFamily="Montserrat"
         key={value}
         onClick={this.onClick}
