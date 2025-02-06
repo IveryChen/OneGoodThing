@@ -72,14 +72,14 @@ class MeasuredGrid extends React.PureComponent {
       >
         {({ measureRef }) => (
           <Box
-            ref={measureRef}
             alignContent="start"
             display="grid"
-            gap={row === 10 ? 24 / row : 12}
+            gap={row === 2 && 12}
             gridTemplateColumns={`repeat(${row}, 1fr)`}
             height="100%"
             overflow="auto"
             overflowX="hidden"
+            ref={measureRef}
           >
             {this.state.dimensions.width > 0 &&
               this.renderItems(this.state.dimensions.width)}
