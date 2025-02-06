@@ -118,6 +118,7 @@ export default class NoteModal extends React.PureComponent {
               justifySelf="end"
               label={edit ? "SAVE" : "EDIT"}
               onClick={edit ? this.handleSubmit : this.toggleEdit}
+              p={0}
             />
           </Box>
           {edit && (
@@ -154,6 +155,7 @@ export default class NoteModal extends React.PureComponent {
               justifySelf="end"
               label="DELETE"
               onClick={this.handleDelete}
+              p={0}
             />
           </Box>
         </Box>
