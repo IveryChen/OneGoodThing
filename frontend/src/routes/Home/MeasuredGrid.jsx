@@ -33,7 +33,6 @@ class MeasuredGrid extends React.PureComponent {
               top={`${offset}px`}
               transform={`rotate(${rotation}deg)`}
               width="100%"
-              zIndex={index}
             >
               <Note
                 data={note}
