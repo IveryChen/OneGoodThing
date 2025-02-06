@@ -5,7 +5,7 @@ import Box from "../../components/Box";
 
 import Tab from "./Tab";
 
-const values = [1, 2, 5, 10];
+const values = [2, 10, 18];
 
 export default class Footer extends React.PureComponent {
   render() {

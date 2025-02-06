@@ -1,11 +1,9 @@
-import { map } from "lodash";
 import React from "react";
 import { Async } from "react-async";
 
 import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
-import Tip from "../../components/Tip";
 import { theme } from "../../constants/constants";
 import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
@@ -14,7 +12,6 @@ import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
-import Note from "./Note";
 import NoteModal from "./NoteModal";
 
 class Home extends React.PureComponent {
@@ -39,64 +36,6 @@ class Home extends React.PureComponent {
       </Async>
     );
   }
-
-  renderGridItems = (notes, dateMap, row, editId, reload) => {
-    if (row === 10) {
-      const allDays = getDaysInYear();
-
-      return map(allDays, (day) => {
-        const noteId = dateMap[day.toDateString()];
-
-        if (!noteId) {
-          return (
-            <Tip title={day.toDateString()}>
-              <Box display="grid" key={day.toDateString()} size={36}>
-                <Box
-                  alignSelf="center"
-                  bg={theme.lightgray}
-                  borderRadius="50%"
-                  justifySelf="center"
-                  size={4}
-                />
-              </Box>
-            </Tip>
-          );
-        }
-
-        const note = notes[noteId];
-
-        return (
-          <Tip title={new Date(note.createdAt).toDateString()}>
-            <Box size={36}>
-              <Note
-                data={note}
-                editId={editId}
-                key={noteId}
-                onChangeEditId={this.onChangeEditId}
-                onNoteUpdated={reload}
-                row={row}
-                showContent={false}
-              />
-            </Box>
-          </Tip>
-        );
-      });
-    }
-
-    return map(notes, (note) => (
-      <Tip title={new Date(note.createdAt).toDateString()}>
-        <Note
-          data={note}
-          editId={editId}
-          key={note._id}
-          onChangeEditId={this.onChangeEditId}
-          onNoteUpdated={reload}
-          row={row}
-          showContent={row < 5}
-        />
-      </Tip>
-    ));
-  };
 
   renderBody = ({ data, error, isPending, reload }) => {
     if (!data) {
