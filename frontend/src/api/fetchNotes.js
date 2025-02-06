@@ -21,7 +21,7 @@ export async function fetchNotes(props) {
   each(data, (note) => {
     const date = formatDateString(note.createdAt);
 
-    dateMap[date] = note._id;
+    dateMap[date] = [...(dateMap[date] || []), note._id];
   });
 
   return { dateMap, notes: keyBy(data, "_id") };
