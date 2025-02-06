@@ -15,12 +15,16 @@ class MeasuredGrid extends React.PureComponent {
 
   renderItems = (width) => {
     const { notes, dateMap, row, editId, reload, allDays } = this.props;
-    const gridSize = Math.floor((width - 32) / row); // Subtract padding and divide by rows
+    const gridSize = Math.floor((width - 24) / row);
 
     return map(allDays, (day) => {
       const noteId = dateMap[day.toDateString()];
 
       if (!noteId) {
+        if (row < 5) {
+          return null;
+        }
+
         return (
           <Tip title={day.toDateString()}>
             <Box display="grid" key={day.toDateString()} size={gridSize}>
