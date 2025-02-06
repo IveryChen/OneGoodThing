@@ -9,10 +9,10 @@ import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
 import AddNoteModal from "./AddNoteModal";
+import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
-import EditNoteModal from "./NoteModal";
 
 class Home extends React.PureComponent {
   state = { editId: null, note: "", open: false, row: 10 };

@@ -26,11 +26,7 @@ export default class Modal extends React.PureComponent {
         right={0}
         top={0}
       >
-        <Box
-          maxHeight="80%"
-          onClick={(e) => e.stopPropagation()}
-          overflow="auto"
-        >
+        <Box maxHeight="100%" onClick={(e) => e.stopPropagation()}>
           {children}
         </Box>
       </StyledBox>

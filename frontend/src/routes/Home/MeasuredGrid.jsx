@@ -1,9 +1,11 @@
 import React from "react";
 import Measure from "react-measure";
 import { map } from "lodash";
+
 import Box from "../../components/Box";
 import Tip from "../../components/Tip";
 import { theme } from "../../constants/constants";
+
 import Note from "./Note";
 
 class MeasuredGrid extends React.PureComponent {
