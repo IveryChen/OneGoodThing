@@ -1,7 +1,6 @@
 import React from "react";
 import Measure from "react-measure";
 import { map } from "lodash";
-
 import Box from "../../components/Box";
 import Tip from "../../components/Tip";
 import { theme } from "../../constants/constants";
@@ -16,7 +15,7 @@ class MeasuredGrid extends React.PureComponent {
 
   renderItems = (width) => {
     const { notes, dateMap, row, editId, reload, allDays } = this.props;
-    const gridSize = Math.floor((width - 24) / row);
+    const gridSize = Math.floor((width - 32) / row); // Subtract padding and divide by rows
 
     return map(allDays, (day) => {
       const noteId = dateMap[day.toDateString()];
@@ -41,7 +40,7 @@ class MeasuredGrid extends React.PureComponent {
 
       return (
         <Tip title={new Date(note.createdAt).toDateString()}>
-          <Box size={gridSize}>
+          <Box width={gridSize} height={gridSize}>
             <Note
               data={note}
               editId={editId}
@@ -49,7 +48,7 @@ class MeasuredGrid extends React.PureComponent {
               onChangeEditId={this.props.onChangeEditId}
               onNoteUpdated={reload}
               row={row}
-              showContent={false}
+              showContent={row < 5}
             />
           </Box>
         </Tip>
@@ -69,15 +68,14 @@ class MeasuredGrid extends React.PureComponent {
       >
         {({ measureRef }) => (
           <Box
+            ref={measureRef}
             alignContent="start"
             display="grid"
             gap={row === 10 ? 24 / row : 12}
             gridTemplateColumns={`repeat(${row}, 1fr)`}
             height="100%"
-            key={row}
             overflow="auto"
             overflowX="hidden"
-            ref={measureRef}
           >
             {this.state.dimensions.width > 0 &&
               this.renderItems(this.state.dimensions.width)}

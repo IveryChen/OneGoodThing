@@ -13,7 +13,7 @@ import { withRouter } from "../../utils/withRouter";
 import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
-import MeasureGrid from "./MeasureGrid";
+import MeasuredGrid from "./MeasuredGrid";
 import Note from "./Note";
 import NoteModal from "./NoteModal";
 
@@ -126,7 +126,7 @@ class Home extends React.PureComponent {
           pb={0}
         >
           <Header mb="12px" onChangeIsOpen={this.onChangeIsOpen} />
-          <MeasureGrid
+          <MeasuredGrid
             notes={notes}
             dateMap={dateMap}
             row={row}
