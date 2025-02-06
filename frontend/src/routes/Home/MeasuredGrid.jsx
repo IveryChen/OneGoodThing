@@ -33,7 +33,7 @@ class MeasuredGrid extends React.PureComponent {
                 bg={theme.lightgray}
                 borderRadius="50%"
                 justifySelf="center"
-                size={4}
+                size={2}
               />
             </Box>
           </Tip>
@@ -44,7 +44,7 @@ class MeasuredGrid extends React.PureComponent {
 
       return (
         <Tip title={new Date(note.createdAt).toDateString()}>
-          <Box width={gridSize} height={gridSize}>
+          <Box height={gridSize} width={gridSize}>
             <Note
               data={note}
               editId={editId}
