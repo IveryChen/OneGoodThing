@@ -13,13 +13,13 @@ const TooltipContainer = styled(Box)`
 
 const positions = {
   bottom: { bottom: "-16px" },
-  center: { top: "0px" },
+  center: { top: "50%", transform: "translate(-50%, -50%)" },
   top: { top: "-16px" },
 };
 
 class Tip extends React.PureComponent {
   render() {
-    const { children, position = "bottom", title, ...restProps } = this.props;
+    const { children, position = "center", title, ...restProps } = this.props;
 
     return (
       <TooltipContainer
