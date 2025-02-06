@@ -146,18 +146,17 @@ export default class NoteModal extends React.PureComponent {
               type="text"
               value={note}
             />
-
-            <IconButton
-              borderWidth={0}
-              color={theme.darkgray}
-              disabled={isPending}
-              justifyItems="center"
-              justifySelf="end"
-              label="DELETE"
-              onClick={this.handleDelete}
-              p={0}
-            />
           </Box>
+          <IconButton
+            borderWidth={0}
+            color={theme.darkgray}
+            disabled={isPending}
+            justifyItems="center"
+            justifySelf="end"
+            label="DELETE"
+            onClick={this.handleDelete}
+            p={0}
+          />
         </Box>
       </Modal>
     );
