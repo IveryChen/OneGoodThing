@@ -25,7 +25,7 @@ class Header extends React.PureComponent {
   };
 
   render() {
-    const { user, ...restProps } = this.props;
+    const { onChangeIsOpen, user, ...restProps } = this.props;
     const { isDropdownOpen } = this.state;
 
     return (

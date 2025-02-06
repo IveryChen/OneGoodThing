@@ -64,7 +64,7 @@ class MeasuredGrid extends React.PureComponent {
         }
 
         return (
-          <Tip title={date}>
+          <Tip key={date} title={date}>
             <Box display="grid" key={date} size={gridSize}>
               <Box
                 alignSelf="center"
@@ -80,7 +80,10 @@ class MeasuredGrid extends React.PureComponent {
 
       if (size(noteIds) > 1) {
         return (
-          <Tip title={`${formatDateString(day)} (${noteIds.length})`}>
+          <Tip
+            key={date}
+            title={`${formatDateString(day)} (${noteIds.length})`}
+          >
             {this.renderStackedNotes(
               noteIds,
               notes,
@@ -95,12 +98,11 @@ class MeasuredGrid extends React.PureComponent {
 
       const note = notes[noteIds[0]];
       return (
-        <Tip title={formatDateString(note.createdAt)}>
+        <Tip key={date} title={formatDateString(note.createdAt)}>
           <Box height={gridSize} width={gridSize}>
             <Note
               data={note}
               editId={editId}
-              key={noteIds}
               onChangeEditId={this.props.onChangeEditId}
               onNoteUpdated={reload}
               row={row}
