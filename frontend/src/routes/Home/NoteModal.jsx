@@ -8,7 +8,7 @@ import ColorPicker from "../../components/ColorPicker";
 import Modal from "../../components/Modal";
 import IconButton from "../../components/IconButton";
 import Text from "../../components/Text";
-import { stickies, theme } from "../../constants/constants";
+import { theme } from "../../constants/constants";
 import format from "../../utils/format";
 
 const StyledInput = styled.textarea`
@@ -25,7 +25,7 @@ const StyledInput = styled.textarea`
 
 export default class NoteModal extends React.PureComponent {
   state = {
-    color: this.props.data?.color || stickies.lightyellow,
+    color: this.props.data?.color,
     edit: false,
     isPending: false,
     note: "",
@@ -33,13 +33,19 @@ export default class NoteModal extends React.PureComponent {
 
   componentDidMount() {
     if (this.props.data) {
-      this.setState({ note: this.props.data.text });
+      this.setState({
+        color: this.props.data.color,
+        note: this.props.data.text,
+      });
     }
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.data && this.props.data) {
-      this.setState({ note: this.props.data.text });
+      this.setState({
+        color: this.props.data.color,
+        note: this.props.data.text,
+      });
     }
   }
 
