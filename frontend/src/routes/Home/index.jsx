@@ -15,7 +15,7 @@ import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
 
 class Home extends React.PureComponent {
-  state = { editId: null, note: "", open: false, row: 10 };
+  state = { editId: null, note: "", open: false, row: 14 };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
