@@ -1,11 +1,7 @@
-import { map } from "lodash";
 import React from "react";
 
 import Box from "../../components/Box";
-
-import Tab from "./Tab";
-
-const values = [2, 7, 14];
+import RowSlider from "../../components/RowSlider";
 
 export default class Footer extends React.PureComponent {
   render() {
@@ -21,14 +17,7 @@ export default class Footer extends React.PureComponent {
         mt="8px"
         {...restProps}
       >
-        {map(values, (value) => (
-          <Tab
-            isSelected={row === value}
-            key={value}
-            onChangeRow={onChangeRow}
-            value={value}
-          />
-        ))}
+        <RowSlider onChangeRow={onChangeRow} row={row} />
       </Box>
     );
   }

@@ -43,7 +43,7 @@ class MeasuredGrid extends React.PureComponent {
                 onChangeEditId={onChangeEditId}
                 onNoteUpdated={reload}
                 row={row}
-                showContent={row < 5}
+                showContent={row < 3}
               />
             </Box>
           );
@@ -62,7 +62,7 @@ class MeasuredGrid extends React.PureComponent {
       const noteIds = dateMap[date];
 
       if (!noteIds || isEmpty(noteIds)) {
-        if (row < 5) {
+        if (row < 7) {
           return null;
         }
 
@@ -93,7 +93,7 @@ class MeasuredGrid extends React.PureComponent {
               onChangeEditId={this.props.onChangeEditId}
               onNoteUpdated={reload}
               row={row}
-              showContent={row < 5}
+              showContent={row < 3}
             />
           </Box>
         </Tip>
@@ -115,7 +115,7 @@ class MeasuredGrid extends React.PureComponent {
           <Box
             alignContent="start"
             display="grid"
-            gap={row === 2 && 12}
+            gap={row < 3 && 12}
             gridTemplateColumns={`repeat(${row}, 1fr)`}
             height="100%"
             overflow="auto"

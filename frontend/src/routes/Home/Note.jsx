@@ -26,14 +26,14 @@ export default class Note extends React.PureComponent {
     const { data, row, showContent } = this.props;
     const readable = readableColor(data.color);
     const color = data.color.replace("#", "");
-    const image = `${row === 2 ? "edit" : `${color}_10`}`;
+    const image = `${row < 3 ? "edit" : `${color}_10`}`;
 
     return (
       <Box aspectRatio={1} onClick={this.onClick} position="relative">
         <Box
           alt="Note background"
           as="img"
-          bg={row === 2 ? data.color : "transparent"}
+          bg={row < 3 ? data.color : "transparent"}
           left={0}
           position="absolute"
           src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}.png`}
