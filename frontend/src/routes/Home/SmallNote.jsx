@@ -6,7 +6,7 @@ export default class SmallNote extends React.PureComponent {
   onClick = () => this.props.onChangeEditId(this.props.id);
 
   render() {
-    const { data } = this.props;
+    const { data, selected } = this.props;
     const image = data.color.replace("#", "");
 
     return (
@@ -14,7 +14,7 @@ export default class SmallNote extends React.PureComponent {
         alt="Note background"
         as="img"
         onClick={this.onClick}
-        size={32}
+        size={selected ? 32 : 24}
         src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}_10.png`}
       />
     );

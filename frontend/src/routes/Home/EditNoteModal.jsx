@@ -100,7 +100,8 @@ export default class EditNoteModal extends React.PureComponent {
   };
 
   render() {
-    const { data, isOpen, onChangeEditId, onClose, stackData } = this.props;
+    const { data, editId, isOpen, onChangeEditId, onClose, stackData } =
+      this.props;
     const { color, edit, isPending, note } = this.state;
 
     if (!data) {
@@ -110,13 +111,14 @@ export default class EditNoteModal extends React.PureComponent {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
-          <Box display="flex" flexWrap="wrap" gap="4px">
+          <Box alignItems="center" display="flex" flexWrap="wrap" gap="4px">
             {map(stackData, (data) => (
               <SmallNote
                 data={data}
                 id={data._id}
                 key={data._id}
                 onChangeEditId={onChangeEditId}
+                selected={editId === data._id}
               />
             ))}
           </Box>

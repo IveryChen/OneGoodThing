@@ -83,6 +83,7 @@ class Home extends React.PureComponent {
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <EditNoteModal
             data={notes[editId]}
+            editId={editId}
             isOpen={editId}
             onClose={this.onClose}
             onChangeEditId={this.onChangeEditId}
