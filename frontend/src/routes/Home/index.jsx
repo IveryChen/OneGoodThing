@@ -16,11 +16,11 @@ import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
 
 class Home extends React.PureComponent {
-  state = { editId: null, note: "", open: false, row: 14, showDate: null };
+  state = { add: false, editId: null, note: "", row: 14, showDate: null };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
-  onChangeIsOpen = (open) => this.setState({ open });
+  onChangeAdd = (add) => this.setState({ add });
 
   onChangeNote = (note) => this.setState({ note });
 
@@ -28,7 +28,7 @@ class Home extends React.PureComponent {
 
   onChangeShowDate = (showDate) => this.setState({ showDate });
 
-  onClose = () => this.setState({ editId: null, open: false });
+  onClose = () => this.setState({ add: false, editId: null });
 
   render() {
     const token = localStorage.getItem("token");
@@ -46,7 +46,7 @@ class Home extends React.PureComponent {
     }
 
     const { dateMap, notes } = data;
-    const { editId, note, open, row, showDate } = this.state;
+    const { add, editId, note, row, showDate } = this.state;
 
     if (isPending)
       return (
@@ -69,12 +69,13 @@ class Home extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Header mb="12px" onChangeIsOpen={this.onChangeIsOpen} />
+          <Header mb="12px" onChangeAdd={this.onChangeAdd} />
           <MeasuredGrid
             allDays={allDays}
             dateMap={dateMap}
             editId={editId}
             notes={notes}
+            onChangeAdd={this.onChangeAdd}
             onChangeEditId={this.onChangeEditId}
             onChangeShowDate={this.onChangeShowDate}
             reload={reload}
@@ -92,9 +93,9 @@ class Home extends React.PureComponent {
             stackData={stackData}
           />
           <AddNoteModal
-            isOpen={open}
+            isOpen={add}
             note={note}
-            onChangeIsOpen={this.onChangeIsOpen}
+            onChangeAdd={this.onChangeAdd}
             onChangeNote={this.onChangeNote}
             onClose={this.onClose}
             onNoteUpdated={reload}

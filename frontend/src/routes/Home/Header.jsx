@@ -16,7 +16,7 @@ class Header extends React.PureComponent {
     window.location.href = "/";
   };
 
-  openModal = () => this.props.onChangeIsOpen(true);
+  openModal = () => this.props.onChangeAdd(true);
 
   toggleDropdown = () => {
     this.setState((prevState) => ({
@@ -25,7 +25,7 @@ class Header extends React.PureComponent {
   };
 
   render() {
-    const { onChangeIsOpen, user, ...restProps } = this.props;
+    const { onChangeAdd, user, ...restProps } = this.props;
     const { isDropdownOpen } = this.state;
 
     return (

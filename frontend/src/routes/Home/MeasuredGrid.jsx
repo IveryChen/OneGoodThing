@@ -4,9 +4,9 @@ import { isEmpty, map, size } from "lodash";
 
 import Box from "../../components/Box";
 import Tip from "../../components/Tip";
-import { theme } from "../../constants/constants";
 import formatDateString from "../../utils/formatDateString";
 
+import Dot from "./Dot";
 import Note from "./Note";
 
 class MeasuredGrid extends React.PureComponent {
@@ -52,7 +52,8 @@ class MeasuredGrid extends React.PureComponent {
   };
 
   renderItems = (width) => {
-    const { allDays, dateMap, editId, notes, reload, row } = this.props;
+    const { allDays, dateMap, editId, notes, onChangeAdd, reload, row } =
+      this.props;
     const gridSize = Math.floor((width - 24) / row);
 
     return map(allDays, (day) => {
@@ -67,13 +68,7 @@ class MeasuredGrid extends React.PureComponent {
         return (
           <Tip key={date} title={date}>
             <Box display="grid" key={date} size={gridSize}>
-              <Box
-                alignSelf="center"
-                bg={theme.lightgray}
-                borderRadius="50%"
-                justifySelf="center"
-                size={2}
-              />
+              <Dot onChangeAdd={onChangeAdd} />
             </Box>
           </Tip>
         );

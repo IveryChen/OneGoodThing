@@ -43,7 +43,7 @@ export default class AddNoteModal extends React.PureComponent {
 
     try {
       await submitNote(this.props.note, color, token);
-      this.props.onChangeIsOpen(false);
+      this.props.onChangeAdd(false);
       this.props.onNoteUpdated();
     } catch (e) {
       console.error(e);
