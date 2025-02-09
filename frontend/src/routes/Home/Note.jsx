@@ -4,9 +4,13 @@ import { readableColor } from "polished";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import format from "../../utils/format";
+import formatDateString from "../../utils/formatDateString";
 
 export default class Note extends React.PureComponent {
-  onClick = () => this.props.onChangeEditId(this.props.data._id);
+  onClick = () => {
+    this.props.onChangeShowDate(formatDateString(this.props.data.createdAt));
+    this.props.onChangeEditId(this.props.data._id);
+  };
 
   render() {
     const { data, row, showContent } = this.props;

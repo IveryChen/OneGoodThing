@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { map } from "lodash";
 import React from "react";
 
 import { deleteNote } from "../../api/deleteNote";
@@ -97,7 +98,7 @@ export default class EditNoteModal extends React.PureComponent {
   };
 
   render() {
-    const { data, isOpen, onClose } = this.props;
+    const { data, isOpen, onClose, stackData } = this.props;
     const { color, edit, isPending, note } = this.state;
 
     if (!data) {
@@ -107,6 +108,22 @@ export default class EditNoteModal extends React.PureComponent {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
+          <Box display="flex" flexWrap="wrap" gap="4px">
+            {map(stackData, (data) => {
+              const { color, _id } = data;
+              const image = color.replace("#", "");
+
+              return (
+                <Box
+                  alt="Note background"
+                  as="img"
+                  key={_id}
+                  size={32}
+                  src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}_10.png`}
+                />
+              );
+            })}
+          </Box>
           <Box
             alignItems="center"
             display="flex"

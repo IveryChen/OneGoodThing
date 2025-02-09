@@ -1,3 +1,4 @@
+import { map } from "lodash";
 import React from "react";
 import { Async } from "react-async";
 
@@ -56,6 +57,8 @@ class Home extends React.PureComponent {
     if (error) return <Text p="12px">Error: {error.message}</Text>;
     if (notes) {
       const allDays = getDaysInYear();
+      const stackIds = showDate && dateMap[showDate];
+      const stackData = stackIds && map(stackIds, (id) => notes[id]);
 
       return (
         <Box
@@ -76,7 +79,6 @@ class Home extends React.PureComponent {
             onChangeShowDate={this.onChangeShowDate}
             reload={reload}
             row={row}
-            showDate={showDate}
           />
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <EditNoteModal
@@ -84,6 +86,8 @@ class Home extends React.PureComponent {
             isOpen={editId}
             onClose={this.onClose}
             onNoteUpdated={reload}
+            showDate={showDate}
+            stackData={stackData}
           />
           <AddNoteModal
             isOpen={open}
