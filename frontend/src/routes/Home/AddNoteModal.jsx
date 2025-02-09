@@ -68,12 +68,7 @@ export default class AddNoteModal extends React.PureComponent {
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px" p="8px">
-          <Text
-            color={theme.darkbrown}
-            fontFamily="Montserrat"
-            fontSize="16px"
-            fontWeight="bold"
-          >
+          <Text color={theme.darkbrown} fontFamily="Montserrat" fontSize="16px">
             {date && format(date)}
           </Text>
           <ColorPicker

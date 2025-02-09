@@ -11,13 +11,14 @@ const StyledText = styled(Text)`
   font-size: 16px;
 
   @media (max-width: 768px) {
-    font-size: 12px;
+    font-size: ${(props) => (props.row === 1 ? "16px" : "12px")};
   }
 `;
 
 export default class Note extends React.PureComponent {
   onClick = () => {
     const { onChangeEditId, onChangeShowDate, data } = this.props;
+
     onChangeShowDate && onChangeShowDate(formatDateString(data.createdAt));
     onChangeEditId(data._id);
   };
@@ -40,24 +41,33 @@ export default class Note extends React.PureComponent {
           top={0}
           width="100%"
         />
-        <Box
-          display="grid"
-          gridTemplateRows="auto 1fr"
-          height="100%"
-          p="12px"
-          position="relative"
-        >
-          {showContent && (
-            <>
-              <StyledText color={readable} justifySelf="start">
-                {format(data.createdAt)}
-              </StyledText>
-              <StyledText color={readable} overflowX="hidden">
-                {data.text}
-              </StyledText>
-            </>
-          )}
-        </Box>
+        {showContent && (
+          <Box
+            display="grid"
+            gap="2px"
+            gridTemplateRows="auto 1fr"
+            height="100%"
+            p="12px"
+            position="relative"
+          >
+            <StyledText
+              color={readable}
+              fontFamily="Montserrat"
+              justifySelf="start"
+              row={row}
+            >
+              {format(data.createdAt)}
+            </StyledText>
+            <StyledText
+              color={readable}
+              fontFamily="Montserrat"
+              overflowX="hidden"
+              row={row}
+            >
+              {data.text}
+            </StyledText>
+          </Box>
+        )}
       </Box>
     );
   }

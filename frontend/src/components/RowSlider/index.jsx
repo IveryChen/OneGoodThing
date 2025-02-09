@@ -60,7 +60,7 @@ export default class RowSlider extends React.PureComponent {
     const { row } = this.props;
 
     return (
-      <Box maxWidth="600px" p="24px" width="100%">
+      <Box maxWidth="600px" px="12px" py="24px" width="100%">
         <Box display="grid" gap="16px">
           <Box display="grid" gap="8px">
             <StyledSlider
