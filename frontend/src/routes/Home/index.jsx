@@ -15,7 +15,7 @@ import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
 
 class Home extends React.PureComponent {
-  state = { editId: null, note: "", open: false, row: 14 };
+  state = { editId: null, note: "", open: false, row: 14, showDate: null };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
@@ -24,6 +24,8 @@ class Home extends React.PureComponent {
   onChangeNote = (note) => this.setState({ note });
 
   onChangeRow = (row) => this.setState({ row });
+
+  onChangeShowDate = (showDate) => this.setState({ showDate });
 
   onClose = () => this.setState({ editId: null, open: false });
 
@@ -43,7 +45,7 @@ class Home extends React.PureComponent {
     }
 
     const { dateMap, notes } = data;
-    const { editId, note, open, row } = this.state;
+    const { editId, note, open, row, showDate } = this.state;
 
     if (isPending)
       return (
@@ -66,13 +68,15 @@ class Home extends React.PureComponent {
         >
           <Header mb="12px" onChangeIsOpen={this.onChangeIsOpen} />
           <MeasuredGrid
-            notes={notes}
-            dateMap={dateMap}
-            row={row}
-            editId={editId}
-            reload={reload}
             allDays={allDays}
+            dateMap={dateMap}
+            editId={editId}
+            notes={notes}
             onChangeEditId={this.onChangeEditId}
+            onChangeShowDate={this.onChangeShowDate}
+            reload={reload}
+            row={row}
+            showDate={showDate}
           />
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <EditNoteModal

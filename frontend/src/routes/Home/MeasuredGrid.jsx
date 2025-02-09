@@ -16,7 +16,10 @@ class MeasuredGrid extends React.PureComponent {
     },
   };
 
-  renderStackedNotes = (noteIds, notes, gridSize, editId, reload, row) => {
+  renderStackedNotes = (noteIds, gridSize) => {
+    const { editId, notes, onChangeEditId, onChangeShowDate, reload, row } =
+      this.props;
+
     return (
       <Box height={gridSize} position="relative" width={gridSize}>
         {map(noteIds, (noteId, index) => {
@@ -35,7 +38,8 @@ class MeasuredGrid extends React.PureComponent {
               <Note
                 data={note}
                 editId={editId}
-                onChangeEditId={this.props.onChangeEditId}
+                onChangeShowDate={onChangeShowDate}
+                onChangeEditId={onChangeEditId}
                 onNoteUpdated={reload}
                 row={row}
                 showContent={row < 5}
@@ -48,7 +52,7 @@ class MeasuredGrid extends React.PureComponent {
   };
 
   renderItems = (width) => {
-    const { notes, dateMap, row, editId, reload, allDays } = this.props;
+    const { allDays, dateMap, editId, notes, reload, row } = this.props;
     const gridSize = Math.floor((width - 24) / row);
 
     return map(allDays, (day) => {
@@ -81,14 +85,7 @@ class MeasuredGrid extends React.PureComponent {
             key={date}
             title={`${formatDateString(day)} (${noteIds.length})`}
           >
-            {this.renderStackedNotes(
-              noteIds,
-              notes,
-              gridSize,
-              editId,
-              reload,
-              row
-            )}
+            {this.renderStackedNotes(noteIds, gridSize)}
           </Tip>
         );
       }
