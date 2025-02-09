@@ -85,6 +85,7 @@ class Home extends React.PureComponent {
             data={notes[editId]}
             isOpen={editId}
             onClose={this.onClose}
+            onChangeEditId={this.onChangeEditId}
             onNoteUpdated={reload}
             showDate={showDate}
             stackData={stackData}

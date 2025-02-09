@@ -12,6 +12,8 @@ import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 import format from "../../utils/format";
 
+import SmallNote from "./SmallNote";
+
 const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor};
   border-style: none;
@@ -98,7 +100,7 @@ export default class EditNoteModal extends React.PureComponent {
   };
 
   render() {
-    const { data, isOpen, onClose, stackData } = this.props;
+    const { data, isOpen, onChangeEditId, onClose, stackData } = this.props;
     const { color, edit, isPending, note } = this.state;
 
     if (!data) {
@@ -109,20 +111,14 @@ export default class EditNoteModal extends React.PureComponent {
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px">
           <Box display="flex" flexWrap="wrap" gap="4px">
-            {map(stackData, (data) => {
-              const { color, _id } = data;
-              const image = color.replace("#", "");
-
-              return (
-                <Box
-                  alt="Note background"
-                  as="img"
-                  key={_id}
-                  size={32}
-                  src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}_10.png`}
-                />
-              );
-            })}
+            {map(stackData, (data) => (
+              <SmallNote
+                data={data}
+                id={data._id}
+                key={data._id}
+                onChangeEditId={onChangeEditId}
+              />
+            ))}
           </Box>
           <Box
             alignItems="center"
