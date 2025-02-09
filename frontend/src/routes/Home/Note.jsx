@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import React from "react";
 import { readableColor } from "polished";
 
@@ -5,6 +6,14 @@ import Box from "../../components/Box";
 import Text from "../../components/Text";
 import format from "../../utils/format";
 import formatDateString from "../../utils/formatDateString";
+
+const StyledText = styled(Text)`
+  font-size: 16px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
 
 export default class Note extends React.PureComponent {
   onClick = () => {
@@ -40,12 +49,12 @@ export default class Note extends React.PureComponent {
         >
           {showContent && (
             <>
-              <Text color={readable} fontSize={12} justifySelf="start">
+              <StyledText color={readable} justifySelf="start">
                 {format(data.createdAt)}
-              </Text>
-              <Text color={readable} overflowX="hidden">
+              </StyledText>
+              <StyledText color={readable} overflowX="hidden">
                 {data.text}
-              </Text>
+              </StyledText>
             </>
           )}
         </Box>

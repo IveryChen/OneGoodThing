@@ -25,7 +25,7 @@ class MeasuredGrid extends React.PureComponent {
         {map(noteIds, (noteId, index) => {
           const note = notes[noteId];
           const even = index % 2 === 0;
-          const rotation = row < 7 ? (even ? -4 : 4) : even ? -8 : 8;
+          const rotation = row < 7 ? (even ? -2 : 2) : even ? -8 : 8;
 
           return (
             <Box
