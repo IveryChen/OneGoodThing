@@ -25,6 +25,10 @@ class GoogleCallback extends React.PureComponent {
       const cachedUser = localStorage.getItem("user");
       const isValid = isTokenValid();
 
+      if (!isValid) {
+        this.props.navigate("/");
+      }
+
       if (cachedUser && isValid) {
         const user = JSON.parse(cachedUser);
         state.select("user").set(user);
