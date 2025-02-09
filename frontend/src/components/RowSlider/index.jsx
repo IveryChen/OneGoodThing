@@ -3,7 +3,6 @@ import * as Slider from "@radix-ui/react-slider";
 import React from "react";
 
 import Box from "../../components/Box";
-import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 
 // Style the slider root
@@ -77,9 +76,6 @@ export default class RowSlider extends React.PureComponent {
               </StyledTrack>
               <StyledThumb />
             </StyledSlider>
-            <Text color={theme.darkgray} fontSize="14px">
-              {row}
-            </Text>
           </Box>
         </Box>
       </Box>
