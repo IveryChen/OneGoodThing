@@ -118,8 +118,14 @@ export default class EditNoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box display="grid" gap="8px">
-          <Box alignItems="center" display="flex" flexWrap="wrap" gap="4px">
+        <Box display="grid" gap="8px" gridTemplateRows="auto 1fr">
+          <Box
+            alignItems="center"
+            display="flex"
+            flexWrap="wrap"
+            gap="4px"
+            justifyContent="center"
+          >
             {map(stackData, (data) => (
               <SmallNote
                 data={data}
@@ -130,62 +136,63 @@ export default class EditNoteModal extends React.PureComponent {
               />
             ))}
           </Box>
-          <Box
-            alignItems="center"
-            display="flex"
-            gap="8px"
-            justifyContent="space-between"
-          >
-            <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
-              {format(data.createdAt)}
-            </Text>
+          <Box display="grid" gap="8px">
+            <Box
+              alignItems="center"
+              display="flex"
+              justifyContent="space-between"
+            >
+              <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
+                {format(data.createdAt)}
+              </Text>
+              <IconButton
+                borderWidth={0}
+                color={edit ? theme.lightbrown : theme.darkbrown}
+                disabled={isPending}
+                justifyItems="center"
+                justifySelf="end"
+                label={edit ? "SAVE" : "EDIT"}
+                onClick={edit ? this.handleSubmit : this.toggleEdit}
+                p={0}
+              />
+            </Box>
+            {edit && (
+              <ColorPicker
+                onChangeColor={this.onChangeColor}
+                selectedColor={color}
+              />
+            )}
+            <Box position="relative">
+              <Box
+                alt="Note background"
+                as="img"
+                left={0}
+                pointerEvents="none"
+                position="absolute"
+                src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
+                top={0}
+                width="100%"
+              />
+              <StyledInput
+                backgroundColor={edit ? color : data.color}
+                onChange={this.handleChange}
+                readOnly={!edit}
+                required={true}
+                type="text"
+                value={note}
+              />
+            </Box>
             <IconButton
               borderWidth={0}
-              color={edit ? theme.lightbrown : theme.darkbrown}
+              color={theme.darkgray}
               disabled={isPending}
               justifyItems="center"
               justifySelf="end"
-              label={edit ? "SAVE" : "EDIT"}
-              onClick={edit ? this.handleSubmit : this.toggleEdit}
+              label="DELETE"
+              onClick={this.handleDelete}
               p={0}
             />
           </Box>
-          {edit && (
-            <ColorPicker
-              onChangeColor={this.onChangeColor}
-              selectedColor={color}
-            />
-          )}
-          <Box position="relative">
-            <Box
-              alt="Note background"
-              as="img"
-              left={0}
-              pointerEvents="none"
-              position="absolute"
-              src={`https://onegoodthing.s3.us-east-2.amazonaws.com/edit.png`}
-              top={0}
-              width="100%"
-            />
-            <StyledInput
-              backgroundColor={edit ? color : data.color}
-              onChange={this.handleChange}
-              readOnly={!edit}
-              required={true}
-              type="text"
-              value={note}
-            />
-          </Box>
-          <IconButton
-            borderWidth={0}
-            color={theme.darkgray}
-            disabled={isPending}
-            justifyItems="center"
-            justifySelf="end"
-            label="DELETE"
-            onClick={this.handleDelete}
-            p={0}
-          />
         </Box>
       </Modal>
     );

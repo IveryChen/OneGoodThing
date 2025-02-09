@@ -8,8 +8,9 @@ import formatDateString from "../../utils/formatDateString";
 
 export default class Note extends React.PureComponent {
   onClick = () => {
-    this.props.onChangeShowDate(formatDateString(this.props.data.createdAt));
-    this.props.onChangeEditId(this.props.data._id);
+    const { onChangeEditId, onChangeShowDate, data } = this.props;
+    onChangeShowDate && onChangeShowDate(formatDateString(data.createdAt));
+    onChangeEditId(data._id);
   };
 
   render() {
