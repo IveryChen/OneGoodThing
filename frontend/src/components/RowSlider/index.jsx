@@ -8,49 +8,49 @@ import { theme } from "../../constants/constants";
 
 // Style the slider root
 const StyledSlider = styled(Slider.Root)`
-  position: relative;
-  display: flex;
   align-items: center;
-  width: 100%;
+  display: flex;
   height: 20px;
+  position: relative;
   touch-action: none;
   user-select: none;
+  width: 100%;
 `;
 
 // Style the track
 const StyledTrack = styled(Slider.Track)`
   background-color: ${theme.lightgray};
-  position: relative;
+  border-radius: 9999px;
   flex-grow: 1;
   height: 3px;
-  border-radius: 9999px;
+  position: relative;
 `;
 
 // Style the range (filled part)
 const StyledRange = styled(Slider.Range)`
-  position: absolute;
   background-color: ${theme.darkbrown};
-  height: 100%;
   border-radius: 9999px;
+  height: 100%;
+  position: absolute;
 `;
 
 // Style the thumb
 const StyledThumb = styled(Slider.Thumb)`
-  display: block;
-  width: 16px;
-  height: 16px;
   background-color: white;
-  border: 2px solid ${theme.darkbrown};
   border-radius: 50%;
+  border: 2px solid ${theme.darkbrown};
   cursor: pointer;
+  display: block;
+  height: 16px;
+  width: 16px;
 
   &:hover {
     background-color: ${theme.lightbrown};
   }
 
   &:focus {
-    outline: none;
     box-shadow: 0 0 0 2px ${theme.lightgray};
+    outline: none;
   }
 `;
 
