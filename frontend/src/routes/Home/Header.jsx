@@ -34,7 +34,7 @@ class Header extends React.PureComponent {
       <Box
         alignItems="center"
         display="flex"
-        height={36}
+        height={24}
         justifyContent="space-between"
         width="100%"
         {...restProps}
@@ -44,12 +44,13 @@ class Header extends React.PureComponent {
           color={theme.darkgray}
           cursor="pointer"
           onClick={this.openModal}
-          size={32}
+          size={24}
         />
         <Box position="relative">
           <Text
             color={theme.darkgray}
             cursor="pointer"
+            fontFamily="Montserrat"
             onClick={this.toggleDropdown}
             textTransform="uppercase"
           >
@@ -69,7 +70,11 @@ class Header extends React.PureComponent {
               width={64}
               zIndex={1}
             >
-              <Text color={theme.darkgray} fontSize="12px">
+              <Text
+                color={theme.darkgray}
+                fontFamily="Montserrat"
+                fontSize="12px"
+              >
                 Logout
               </Text>
             </Box>

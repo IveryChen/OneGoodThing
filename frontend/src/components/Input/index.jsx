@@ -58,7 +58,7 @@ export default class Input extends React.PureComponent {
     return (
       <Box display="grid">
         {label && (
-          <Text fontFamily="Bebas Neue" fontSize="24px" px="4px">
+          <Text fontFamily="Montserrat" fontSize="24px" px="4px">
             {label}
           </Text>
         )}

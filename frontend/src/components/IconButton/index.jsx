@@ -23,7 +23,13 @@ export default class IconButton extends React.PureComponent {
         py="6px"
         {...restProps}
       >
-        <Text fontSize="16px" fontWeight="bold" lineHeight={1} pt="2px">
+        <Text
+          fontFamily="Montserrat"
+          fontSize="16px"
+          fontWeight="bold"
+          lineHeight={1}
+          pt="2px"
+        >
           {label}
         </Text>
         {Icon && <Box as={Icon} size={20} />}

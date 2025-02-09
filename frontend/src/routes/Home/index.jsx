@@ -50,11 +50,16 @@ class Home extends React.PureComponent {
 
     if (isPending)
       return (
-        <Text color={theme.darkgray} p="12px">
+        <Text color={theme.darkgray} fontFamily="Montserrat" p="12px">
           Loading...
         </Text>
       );
-    if (error) return <Text p="12px">Error: {error.message}</Text>;
+    if (error)
+      return (
+        <Text color={theme.darkgray} fontFamily="Montserrat" p="12px">
+          Error: {error.message}
+        </Text>
+      );
     if (notes) {
       const allDays = getDaysInYear();
       const stackIds = showDate && dateMap[showDate];

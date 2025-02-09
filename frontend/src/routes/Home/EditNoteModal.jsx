@@ -142,7 +142,12 @@ export default class EditNoteModal extends React.PureComponent {
               display="flex"
               justifyContent="space-between"
             >
-              <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
+              <Text
+                color={theme.darkbrown}
+                fontFamily="Montserrat"
+                fontSize="16px"
+                fontWeight="bold"
+              >
                 {format(data.createdAt)}
               </Text>
               <IconButton
