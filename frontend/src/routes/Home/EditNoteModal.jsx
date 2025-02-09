@@ -50,6 +50,10 @@ export default class EditNoteModal extends React.PureComponent {
         note: this.props.data.text,
       });
     }
+
+    if (prevProps.editId !== this.props.editId) {
+      this.setState({ color: this.props.data.color, edit: false });
+    }
   }
 
   onChangeColor = (color) => this.setState({ color });
