@@ -51,8 +51,12 @@ export default class EditNoteModal extends React.PureComponent {
       });
     }
 
-    if (prevProps.editId !== this.props.editId) {
-      this.setState({ color: this.props.data.color, edit: false });
+    if (prevProps.editId !== this.props.editId && this.props.data) {
+      this.setState({
+        color: this.props.data.color,
+        edit: false,
+        note: this.props.data.text,
+      });
     }
   }
 
