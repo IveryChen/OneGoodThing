@@ -21,16 +21,14 @@ class MeasuredGrid extends React.PureComponent {
       <Box height={gridSize} position="relative" width={gridSize}>
         {map(noteIds, (noteId, index) => {
           const note = notes[noteId];
-          const rotation = index % 2 === 0 ? -3 : 3;
-          const offset = index * 2;
+          const even = index % 2 === 0;
+          const rotation = row < 7 ? (even ? -4 : 4) : even ? -8 : 8;
 
           return (
             <Box
               height="100%"
               key={noteId}
-              left={`${offset}px`}
               position="absolute"
-              top={`${offset}px`}
               transform={`rotate(${rotation}deg)`}
               width="100%"
             >
