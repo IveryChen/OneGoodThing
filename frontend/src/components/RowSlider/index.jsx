@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
 import * as Slider from "@radix-ui/react-slider";
+import { reduce } from "lodash";
 import React from "react";
 
 import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
+
+const ALLOWED_VALUES = [1, 2, 7, 10, 14];
 
 // Style the slider root
 const StyledSlider = styled(Slider.Root)`
@@ -53,8 +56,18 @@ const StyledThumb = styled(Slider.Thumb)`
   }
 `;
 
+function findClosestValue(value) {
+  return reduce(ALLOWED_VALUES, (prev, curr) =>
+    Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
+  );
+}
+
 export default class RowSlider extends React.PureComponent {
-  handleValueChange = (values) => this.props.onChangeRow(values[0]);
+  handleValueChange = (values) => {
+    const closestValue = findClosestValue(values[0]);
+
+    this.props.onChangeRow(closestValue);
+  };
 
   render() {
     const { row } = this.props;
