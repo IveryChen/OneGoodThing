@@ -40,7 +40,7 @@ export default class AddNoteModal extends React.PureComponent {
   };
 
   handleSubmit = async () => {
-    const { onChangeNote } = this.props;
+    const { date, onChangeNote } = this.props;
     const { color } = this.state;
     const token = localStorage.getItem("token");
 
@@ -49,7 +49,7 @@ export default class AddNoteModal extends React.PureComponent {
     this.setState({ isPending: true });
 
     try {
-      await submitNote(this.props.note, color, token);
+      await submitNote(this.props.note, color, token, date);
       this.props.onChangeDate(null);
       this.props.onNoteUpdated();
     } catch (e) {

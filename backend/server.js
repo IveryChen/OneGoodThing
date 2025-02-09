@@ -114,6 +114,7 @@ app.post("/api/notes", authMiddleware, async (req, res) => {
     const note = new Note({
       text,
       color,
+      createdAt: req.body.createdAt,
       userId: user._id,
     });
 

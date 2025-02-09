@@ -3,5 +3,6 @@ export default function format(date) {
     month: "2-digit",
     day: "2-digit",
     year: "numeric",
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   }).format(new Date(date));
 }
