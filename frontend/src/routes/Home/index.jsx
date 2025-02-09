@@ -16,11 +16,11 @@ import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
 
 class Home extends React.PureComponent {
-  state = { add: false, editId: null, note: "", row: 14, showDate: null };
+  state = { date: false, editId: null, note: "", row: 14, showDate: null };
 
   onChangeEditId = (editId) => this.setState({ editId });
 
-  onChangeAdd = (add) => this.setState({ add });
+  onChangeDate = (date) => this.setState({ date });
 
   onChangeNote = (note) => this.setState({ note });
 
@@ -28,7 +28,7 @@ class Home extends React.PureComponent {
 
   onChangeShowDate = (showDate) => this.setState({ showDate });
 
-  onClose = () => this.setState({ add: false, editId: null });
+  onClose = () => this.setState({ date: false, editId: null });
 
   render() {
     const token = localStorage.getItem("token");
@@ -46,7 +46,7 @@ class Home extends React.PureComponent {
     }
 
     const { dateMap, notes } = data;
-    const { add, editId, note, row, showDate } = this.state;
+    const { date, editId, note, row, showDate } = this.state;
 
     if (isPending)
       return (
@@ -69,13 +69,13 @@ class Home extends React.PureComponent {
           p="12px"
           pb={0}
         >
-          <Header mb="12px" onChangeAdd={this.onChangeAdd} />
+          <Header mb="12px" onChangeDate={this.onChangeDate} />
           <MeasuredGrid
             allDays={allDays}
             dateMap={dateMap}
             editId={editId}
             notes={notes}
-            onChangeAdd={this.onChangeAdd}
+            onChangeDate={this.onChangeDate}
             onChangeEditId={this.onChangeEditId}
             onChangeShowDate={this.onChangeShowDate}
             reload={reload}
@@ -93,9 +93,10 @@ class Home extends React.PureComponent {
             stackData={stackData}
           />
           <AddNoteModal
-            isOpen={add}
+            date={date}
+            isOpen={date}
             note={note}
-            onChangeAdd={this.onChangeAdd}
+            onChangeDate={this.onChangeDate}
             onChangeNote={this.onChangeNote}
             onClose={this.onClose}
             onNoteUpdated={reload}

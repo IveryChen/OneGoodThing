@@ -6,9 +6,16 @@ import ColorPicker from "../../components/ColorPicker";
 import Box from "../../components/Box";
 import IconButton from "../../components/IconButton";
 import Modal from "../../components/Modal";
+import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
 
 import chooseColor from "./chooseColour";
+
+function format(date) {
+  const [year, month, day] = date.split("-");
+
+  return `${month}/${day}/${year}`;
+}
 
 const StyledInput = styled.textarea`
   background-color: ${(props) => props.backgroundColor || chooseColor()};
@@ -43,7 +50,7 @@ export default class AddNoteModal extends React.PureComponent {
 
     try {
       await submitNote(this.props.note, color, token);
-      this.props.onChangeAdd(false);
+      this.props.onChangeDate(null);
       this.props.onNoteUpdated();
     } catch (e) {
       console.error(e);
@@ -55,12 +62,15 @@ export default class AddNoteModal extends React.PureComponent {
   onChangeColor = (color) => this.setState({ color });
 
   render() {
-    const { isOpen, onClose, note } = this.props;
+    const { date, isOpen, onClose, note } = this.props;
     const { color, isPending } = this.state;
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
         <Box display="grid" gap="8px" p="8px">
+          <Text color={theme.darkbrown} fontSize="16px" fontWeight="bold">
+            {date && format(date)}
+          </Text>
           <ColorPicker
             onChangeColor={this.onChangeColor}
             selectedColor={color}

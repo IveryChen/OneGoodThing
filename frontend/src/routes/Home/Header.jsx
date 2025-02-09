@@ -2,11 +2,13 @@ import { branch } from "baobab-react/higher-order";
 import React from "react";
 import { LiaPlusSolid } from "react-icons/lia";
 
-import { theme } from "../../constants/constants";
-import { withRouter } from "../../utils/withRouter";
-
 import Box from "../../components/Box";
 import Text from "../../components/Text";
+import { theme } from "../../constants/constants";
+import formatDateString from "../../utils/formatDateString";
+import { withRouter } from "../../utils/withRouter";
+
+const today = formatDateString(new Date());
 
 class Header extends React.PureComponent {
   state = { isDropdownOpen: false };
@@ -16,7 +18,7 @@ class Header extends React.PureComponent {
     window.location.href = "/";
   };
 
-  openModal = () => this.props.onChangeAdd(true);
+  openModal = () => this.props.onChangeDate(today);
 
   toggleDropdown = () => {
     this.setState((prevState) => ({
@@ -25,7 +27,7 @@ class Header extends React.PureComponent {
   };
 
   render() {
-    const { onChangeAdd, user, ...restProps } = this.props;
+    const { onChangeDate, user, ...restProps } = this.props;
     const { isDropdownOpen } = this.state;
 
     return (

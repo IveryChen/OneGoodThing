@@ -4,7 +4,7 @@ import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
 
 export default class Dot extends React.PureComponent {
-  onClick = () => this.props.onChangeAdd(true);
+  onClick = () => this.props.onChangeDate(this.props.date);
 
   render() {
     return (

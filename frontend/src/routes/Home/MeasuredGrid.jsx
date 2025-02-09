@@ -4,6 +4,7 @@ import { isEmpty, map, size } from "lodash";
 
 import Box from "../../components/Box";
 import Tip from "../../components/Tip";
+import formatDate from "../../utils/formatDate";
 import formatDateString from "../../utils/formatDateString";
 
 import Dot from "./Dot";
@@ -52,7 +53,7 @@ class MeasuredGrid extends React.PureComponent {
   };
 
   renderItems = (width) => {
-    const { allDays, dateMap, editId, notes, onChangeAdd, reload, row } =
+    const { allDays, dateMap, editId, notes, onChangeDate, reload, row } =
       this.props;
     const gridSize = Math.floor((width - 24) / row);
 
@@ -66,9 +67,9 @@ class MeasuredGrid extends React.PureComponent {
         }
 
         return (
-          <Tip key={date} title={date}>
+          <Tip key={date} title={formatDate(day)}>
             <Box display="grid" key={date} size={gridSize}>
-              <Dot onChangeAdd={onChangeAdd} />
+              <Dot date={date} onChangeDate={onChangeDate} />
             </Box>
           </Tip>
         );
@@ -76,10 +77,7 @@ class MeasuredGrid extends React.PureComponent {
 
       if (size(noteIds) > 1) {
         return (
-          <Tip
-            key={date}
-            title={`${formatDateString(day)} (${noteIds.length})`}
-          >
+          <Tip key={date} title={`${formatDate(day)} (${noteIds.length})`}>
             {this.renderStackedNotes(noteIds, gridSize)}
           </Tip>
         );
@@ -87,7 +85,7 @@ class MeasuredGrid extends React.PureComponent {
 
       const note = notes[noteIds[0]];
       return (
-        <Tip key={date} title={formatDateString(note.createdAt)}>
+        <Tip key={date} title={formatDate(note.createdAt)}>
           <Box height={gridSize} width={gridSize}>
             <Note
               data={note}
