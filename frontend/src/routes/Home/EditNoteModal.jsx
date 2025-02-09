@@ -118,13 +118,14 @@ export default class EditNoteModal extends React.PureComponent {
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Box display="grid" gap="8px" gridTemplateRows="auto 1fr">
+        <Box display="grid" gap="16px" gridTemplateRows="auto 1fr">
           <Box
             alignItems="center"
             display="flex"
             flexWrap="wrap"
             gap="4px"
             justifyContent="center"
+            width={320}
           >
             {map(stackData, (data) => (
               <SmallNote
@@ -146,7 +147,6 @@ export default class EditNoteModal extends React.PureComponent {
                 color={theme.darkbrown}
                 fontFamily="Montserrat"
                 fontSize="16px"
-                fontWeight="bold"
               >
                 {format(data.createdAt)}
               </Text>

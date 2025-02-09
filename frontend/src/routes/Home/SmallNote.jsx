@@ -14,7 +14,8 @@ export default class SmallNote extends React.PureComponent {
         alt="Note background"
         as="img"
         onClick={this.onClick}
-        size={selected ? 32 : 24}
+        opacity={selected ? 1 : 1 / 2}
+        size={32}
         src={`https://onegoodthing.s3.us-east-2.amazonaws.com/${image}_10.png`}
       />
     );
