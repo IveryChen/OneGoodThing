@@ -12,6 +12,7 @@ import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
 import AddNoteModal from "./AddNoteModal";
+import Calendar from "./Calendar";
 import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -38,11 +39,20 @@ function organizeNotesIntoCalendar(yearCalendar, dateMap) {
 }
 
 class Home extends React.PureComponent {
-  state = { date: false, editId: null, note: "", row: 14, showDate: null };
+  state = {
+    calendar: false,
+    date: false,
+    editId: null,
+    note: "",
+    row: 14,
+    showDate: null,
+  };
 
-  onChangeEditId = (editId) => this.setState({ editId });
+  onChangeCalendar = (calendar) => this.setState({ calendar });
 
   onChangeDate = (date) => this.setState({ date });
+
+  onChangeEditId = (editId) => this.setState({ editId });
 
   onChangeNote = (note) => this.setState({ note });
 
@@ -68,7 +78,7 @@ class Home extends React.PureComponent {
     }
 
     const { dateMap, notes } = data;
-    const { date, editId, note, row, showDate } = this.state;
+    const { calendar, date, editId, note, row, showDate } = this.state;
 
     if (isPending)
       return (
@@ -99,17 +109,21 @@ class Home extends React.PureComponent {
           pb={0}
         >
           <Header mb="12px" onChangeDate={this.onChangeDate} />
-          <MeasuredGrid
-            allDays={allDays}
-            dateMap={dateMap}
-            editId={editId}
-            notes={notes}
-            onChangeDate={this.onChangeDate}
-            onChangeEditId={this.onChangeEditId}
-            onChangeShowDate={this.onChangeShowDate}
-            reload={reload}
-            row={row}
-          />
+          {calendar ? (
+            <Calendar organizedDates={organizedDates} />
+          ) : (
+            <MeasuredGrid
+              allDays={allDays}
+              dateMap={dateMap}
+              editId={editId}
+              notes={notes}
+              onChangeDate={this.onChangeDate}
+              onChangeEditId={this.onChangeEditId}
+              onChangeShowDate={this.onChangeShowDate}
+              reload={reload}
+              row={row}
+            />
+          )}
           <Footer onChangeRow={this.onChangeRow} row={row} />
           <EditNoteModal
             data={notes[editId]}
