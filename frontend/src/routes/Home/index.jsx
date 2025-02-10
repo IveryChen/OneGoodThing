@@ -124,7 +124,12 @@ class Home extends React.PureComponent {
               row={row}
             />
           )}
-          <Footer onChangeRow={this.onChangeRow} row={row} />
+          <Footer
+            calendar={calendar}
+            onChangeCalendar={this.onChangeCalendar}
+            onChangeRow={this.onChangeRow}
+            row={row}
+          />
           <EditNoteModal
             data={notes[editId]}
             editId={editId}

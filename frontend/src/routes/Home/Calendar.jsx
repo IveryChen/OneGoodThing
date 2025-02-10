@@ -1,7 +1,9 @@
+import { map } from "lodash";
 import React from "react";
 
 import Box from "../../components/Box";
-import { map } from "lodash";
+import Text from "../../components/Text";
+import { theme } from "../../constants/constants";
 
 const daysInWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
