@@ -6,6 +6,8 @@ import { fetchNotes } from "../../api/fetchNotes";
 import Box from "../../components/Box";
 import Text from "../../components/Text";
 import { theme } from "../../constants/constants";
+import formatDateString from "../../utils/formatDateString";
+import getCalendarDates from "../../utils/getCalendarDates";
 import getDaysInYear from "../../utils/getDaysInYear";
 import { withRouter } from "../../utils/withRouter";
 
@@ -14,6 +16,26 @@ import EditNoteModal from "./EditNoteModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import MeasuredGrid from "./MeasuredGrid";
+
+// TODO: dont' hard code this
+const year = 2025;
+
+function organizeNotesIntoCalendar(yearCalendar, dateMap) {
+  return map(yearCalendar, (month) => ({
+    ...month,
+    weeks: map(month.weeks, (week) => {
+      return map(week, (day) => {
+        if (!day) return null;
+
+        const dateKey = formatDateString(day);
+        return {
+          date: dateKey,
+          noteIds: dateMap[dateKey] || [],
+        };
+      });
+    }),
+  }));
+}
 
 class Home extends React.PureComponent {
   state = { date: false, editId: null, note: "", row: 14, showDate: null };
@@ -62,6 +84,8 @@ class Home extends React.PureComponent {
       );
     if (notes) {
       const allDays = getDaysInYear();
+      const yearCalendar = getCalendarDates(year);
+      const organizedDates = organizeNotesIntoCalendar(yearCalendar, dateMap);
       const stackIds = showDate && dateMap[showDate];
       const stackData = stackIds && map(stackIds, (id) => notes[id]);
 

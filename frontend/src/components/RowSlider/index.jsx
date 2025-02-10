@@ -6,7 +6,7 @@ import React from "react";
 import Box from "../../components/Box";
 import { theme } from "../../constants/constants";
 
-const ALLOWED_VALUES = [1, 2, 7, 10, 14];
+const ALLOWED_VALUES = [1, 2, 7, 14];
 
 // Style the slider root
 const StyledSlider = styled(Slider.Root)`
