@@ -9,7 +9,8 @@ export default class Footer extends React.PureComponent {
   onClick = () => this.props.onChangeCalendar(!this.props.calendar);
 
   render() {
-    const { calendar, onChangeRow, row, ...restProps } = this.props;
+    const { calendar, onChangeCalendar, onChangeRow, row, ...restProps } =
+      this.props;
 
     return (
       <Box
