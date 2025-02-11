@@ -11,6 +11,7 @@ import Note from "./Note";
 import StackedNotes from "./StackedNotes";
 
 const daysInWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const noteSize = "80%";
 
 export default class Calendar extends React.PureComponent {
   render() {
@@ -26,7 +27,7 @@ export default class Calendar extends React.PureComponent {
     } = this.props;
 
     return (
-      <Box display="grid" gap="16px" overflow="auto" width="100%">
+      <Box display="grid" gap="16px" overflow="auto">
         <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
           {map(daysInWeek, (day) => (
             <Text
@@ -71,7 +72,7 @@ export default class Calendar extends React.PureComponent {
                           onChangeShowDate={onChangeShowDate}
                           reload={reload}
                           row={row}
-                          size="100%"
+                          size={noteSize}
                         />
                       </Tip>
                     );
@@ -86,12 +87,12 @@ export default class Calendar extends React.PureComponent {
                           aspectRatio={1}
                           display="grid"
                           key={[month, weekIndex, dateIndex]}
-                          size="100%"
+                          size={noteSize}
                         >
                           <Dot
                             date={date}
                             onChangeDate={onChangeDate}
-                            size={4}
+                            size={2}
                           />
                         </Box>
                       </Tip>
@@ -100,7 +101,7 @@ export default class Calendar extends React.PureComponent {
 
                   return (
                     <Tip key={date} title={date}>
-                      <Box size="100%">
+                      <Box size={noteSize}>
                         <Note
                           data={note}
                           editId={editId}
