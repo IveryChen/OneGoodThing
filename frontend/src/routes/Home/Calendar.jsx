@@ -26,19 +26,20 @@ export default class Calendar extends React.PureComponent {
     } = this.props;
 
     return (
-      <Box display="grid" gap="16px" overflow="auto">
-        {/* <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
+      <Box display="grid" gap="16px" overflow="auto" width="100%">
+        <Box display="grid" gridTemplateColumns="repeat(7, 1fr)">
           {map(daysInWeek, (day) => (
             <Text
-              color={theme.darkbrown}
+              color={theme.lightbrown}
               fontFamily="Montserrat"
+              fontSize="12px"
               key={day}
-              textTransform="uppercase"
+              textAlign="center"
             >
               {day}
             </Text>
           ))}
-        </Box> */}
+        </Box>
         {map(organizedDates, ({ month, weeks }) => (
           <Box display="grid">
             <Text

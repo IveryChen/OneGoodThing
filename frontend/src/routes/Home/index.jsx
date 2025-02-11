@@ -105,7 +105,7 @@ class Home extends React.PureComponent {
           gridTemplateRows="auto 1fr auto"
           height="100%"
           overflow="hidden"
-          p="12px"
+          p="16px"
           pb={0}
         >
           <Header mb="12px" onChangeDate={this.onChangeDate} />

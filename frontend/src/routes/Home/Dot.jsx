@@ -12,7 +12,7 @@ export default class Dot extends React.PureComponent {
     return (
       <Box
         alignSelf="center"
-        bg={theme.darkbrown}
+        bg={theme.lightgray}
         borderRadius="50%"
         justifySelf="center"
         onClick={this.onClick}
