@@ -110,7 +110,16 @@ class Home extends React.PureComponent {
         >
           <Header mb="12px" onChangeDate={this.onChangeDate} />
           {calendar ? (
-            <Calendar organizedDates={organizedDates} />
+            <Calendar
+              editId={editId}
+              notes={notes}
+              onChangeDate={this.onChangeDate}
+              onChangeEditId={this.onChangeEditId}
+              onChangeShowDate={this.onChangeShowDate}
+              organizedDates={organizedDates}
+              reload={reload}
+              row={row}
+            />
           ) : (
             <MeasuredGrid
               allDays={allDays}

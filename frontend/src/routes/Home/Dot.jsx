@@ -7,14 +7,16 @@ export default class Dot extends React.PureComponent {
   onClick = () => this.props.onChangeDate(this.props.date);
 
   render() {
+    const { size = 2 } = this.props;
+
     return (
       <Box
         alignSelf="center"
-        bg={theme.lightgray}
+        bg={theme.darkbrown}
         borderRadius="50%"
         justifySelf="center"
         onClick={this.onClick}
-        size={2}
+        size={size}
       />
     );
   }

@@ -41,14 +41,14 @@ class Header extends React.PureComponent {
       >
         <Box
           as={LiaPlusSolid}
-          color={theme.darkgray}
+          color={theme.darkbrown}
           cursor="pointer"
           onClick={this.openModal}
           size={24}
         />
         <Box position="relative">
           <Text
-            color={theme.darkgray}
+            color={theme.darkbrown}
             cursor="pointer"
             fontFamily="Montserrat"
             onClick={this.toggleDropdown}
@@ -71,7 +71,7 @@ class Header extends React.PureComponent {
               zIndex={1}
             >
               <Text
-                color={theme.darkgray}
+                color={theme.darkbrown}
                 fontFamily="Montserrat"
                 fontSize="12px"
               >
