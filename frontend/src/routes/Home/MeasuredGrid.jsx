@@ -9,6 +9,7 @@ import formatDateString from "../../utils/formatDateString";
 
 import Dot from "./Dot";
 import Note from "./Note";
+import StackedNotes from "./StackedNotes";
 
 class MeasuredGrid extends React.PureComponent {
   state = {
@@ -17,44 +18,18 @@ class MeasuredGrid extends React.PureComponent {
     },
   };
 
-  renderStackedNotes = (noteIds, gridSize) => {
-    const { editId, notes, onChangeEditId, onChangeShowDate, reload, row } =
-      this.props;
-
-    return (
-      <Box height={gridSize} position="relative" width={gridSize}>
-        {map(noteIds, (noteId, index) => {
-          const note = notes[noteId];
-          const even = index % 2 === 0;
-          const rotation = row < 7 ? (even ? -2 : 2) : even ? -8 : 8;
-
-          return (
-            <Box
-              height="100%"
-              key={noteId}
-              position="absolute"
-              transform={`rotate(${rotation}deg)`}
-              width="100%"
-            >
-              <Note
-                data={note}
-                editId={editId}
-                onChangeShowDate={onChangeShowDate}
-                onChangeEditId={onChangeEditId}
-                onNoteUpdated={reload}
-                row={row}
-                showContent={row < 3}
-              />
-            </Box>
-          );
-        })}
-      </Box>
-    );
-  };
-
   renderItems = (width) => {
-    const { allDays, dateMap, editId, notes, onChangeDate, reload, row } =
-      this.props;
+    const {
+      allDays,
+      dateMap,
+      editId,
+      notes,
+      onChangeDate,
+      onChangeEditId,
+      onChangeShowDate,
+      reload,
+      row,
+    } = this.props;
     const gridSize = Math.floor((width - 24) / row);
 
     return map(allDays, (day) => {
@@ -78,7 +53,16 @@ class MeasuredGrid extends React.PureComponent {
       if (size(noteIds) > 1) {
         return (
           <Tip key={date} title={`${formatDate(day)} (${noteIds.length})`}>
-            {this.renderStackedNotes(noteIds, gridSize)}
+            <StackedNotes
+              editId={editId}
+              noteIds={noteIds}
+              notes={notes}
+              onChangeEditId={onChangeEditId}
+              onChangeShowDate={onChangeShowDate}
+              reload={reload}
+              row={row}
+              size={gridSize}
+            />
           </Tip>
         );
       }
